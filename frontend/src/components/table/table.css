@@ -1,0 +1,30 @@
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.history-table th,
+.history-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.history-table th {
+    background: #162034;
+    font-weight: 600;
+}
+
+.history-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.history-table button {
+    background: none;
+    border: none;
+    color: #fbc02d;
+    font-weight: bold;
+    cursor: pointer;
+}

@@ -1,11 +1,11 @@
-# [YOUR FULL NAME]'s Submission
+# Alon Baker's Submission
 **Date**: [date here]
 
-**BU Email**: [email here]
+**BU Email**: abaker28@bu.edu
 
-**Class Year**: [year here]
+**Class Year**: 2028
 
-**Favorite Hobby**: [hobby here]
+**Favorite Hobby**: Playing and developing video games.
 
 ## Requirements
 Please check off which features you have implemented:

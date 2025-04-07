@@ -1,0 +1,83 @@
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    cursor: pointer;
+}
+
+.sun-globe-text {
+    font-size: 3.8rem;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #fbc02d, #81b1be);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.sun-globe-text:hover {
+    transform: scale(1.05);
+}
+
+.globe-icon {
+    display: inline-block;
+    width: 0.8em;
+    height: 0.8em;
+    vertical-align: -0.1em;
+    margin: 0 4px;
+    position: relative;
+}
+
+.sunrise-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.globe-svg {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: transform 0.5s ease-in-out;
+}
+
+.sun {
+    position: absolute;
+    width: 0.4em;
+    height: 0.4em;
+    background: radial-gradient(circle, #fff176, #fbc02d);
+    border-radius: 50%;
+    left: 50%;
+    bottom: 10%;
+    transform: translateX(-50%);
+    opacity: 0;
+    z-index: 1;
+}
+
+.sun-globe-text:hover .sun {
+    animation: sunriseUpDown 2s ease-in-out;
+}
+
+@keyframes sunriseUpDown {
+    0%   { bottom: 10%; opacity: 0; }
+    30%  { opacity: 1; }
+    50%  { bottom: 130%; opacity: 1; }
+    100% { bottom: 10%; opacity: 0; }
+}
+
+@keyframes spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.sun-globe-text:hover .globe-svg {
+    animation: spin 1.5s linear infinite;
+}
+.globe-circle {
+    fill: #4caf50;
+}
+
