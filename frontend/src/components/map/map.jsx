@@ -4,7 +4,9 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaf
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { getSunrise, getSunset } from 'sunrise-sunset-js';
+import "leaflet/dist/leaflet.css";
 
+// Marker Icon
 const defaultIcon = new L.Icon({
     iconUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
     iconSize: [25, 41],
@@ -12,7 +14,13 @@ const defaultIcon = new L.Icon({
     popupAnchor: [1, -34],
 });
 
-function LocationMarker({ setMarkers }) {
+function MapClickHandler({ setMarkers }) {
+    /* 
+        Listens and handles click events.
+        Updates markers from the setMarkers state with sunrise and sunset data given from the Lat, Lng.
+        Sends a POST request to backend API to retreive similar location data and also to store marker in history.
+    */
+
     useMapEvents({
         click(e) {
             const { lat, lng } = e.latlng;
@@ -36,7 +44,7 @@ function LocationMarker({ setMarkers }) {
                         },
                     ]);
 
-                    fetch("http://localhost:3000/api/history", {
+                    fetch("http://localhost:3000/api/history/upload", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
@@ -55,16 +63,22 @@ function LocationMarker({ setMarkers }) {
 }
 
 export default function Map() {
+    /* 
+        Component: Map
+        Displays the leaflets map with its handlers.
+    */
+
     const [markers, setMarkers] = useState([]);
 
     return (
-        <MapContainer center={[40, -100]} zoom={4} className="map-container">
+        <MapContainer center={[42.35, -71.09]} zoom={10} className="map-container">
             <TileLayer 
                 url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png"
                  attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; OpenMapTiles &copy; OpenStreetMap'
             /> 
 
-            <LocationMarker setMarkers={setMarkers} />
+            <MapClickHandler setMarkers={setMarkers} />
+            {/*TODO: Clustering that will work with leaflets v4 */}
             {markers.map((marker, idx) => (
                 <Marker key={idx} position={[marker.lat, marker.lng]} icon={defaultIcon}>
                     <Popup>
@@ -75,6 +89,7 @@ export default function Map() {
                     </Popup>
                 </Marker>
             ))}
+
         </MapContainer>
     );
 }

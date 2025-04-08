@@ -4,6 +4,12 @@ import Title from '../../components/title/title'
 import { Moon } from 'lucide-react';
 
 export default function NavBar() {
+    /* 
+        Component: NavBar
+        Navigation bar at the top of frame.
+        Includes the Title component, navigation links, and dark mode toggler.
+    */
+
     return (
         <div className="nav-bar">
             <div className="nav-left">

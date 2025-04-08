@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
 export default function Row({ item, index }) {
+    /* 
+        Component: Row
+        Row for the History Table
+    */
+
     const [expanded, setExpanded] = useState(false);
 
     const {

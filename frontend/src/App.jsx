@@ -4,6 +4,12 @@ import Frame from "./components/frame/frame";
 import './App.css'
 
 function App() {
+  /* 
+        Route (Page): /
+        Component: App
+        Surves the homepage of the app, and retreives and displays map.
+    */
+
   return (
     <Frame>
       <div className="map-wrapper">

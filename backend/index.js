@@ -27,7 +27,14 @@ const model = genAI.getGenerativeModel({
     systemInstruction: `You're helping users explore global locations with similar sunrise/sunset patterns. Given a location and its sunrise/sunset time, your job is to suggest a different part of the world (preferably with different geography or culture) that has similar times. Keep answers brief and clear, and return only the place name and region.`,
 })
 
+
 app.post('/api/suninfo', async (req, res) => {
+    /* 
+        API: /api/suninfo
+        method: POST
+        response: Similiar locations with sunrise / sunset data given by Gemini AI from the requests Lat, Lng.
+    */
+
     const lat = req.body.lat;
     const lng = req.body.lng;
     const message = "Lat: " + lat + " Lng: " + lng
@@ -43,7 +50,13 @@ app.post('/api/suninfo', async (req, res) => {
     })
 })
 
-app.post('/api/history', async (req, res) => {
+app.post('/api/history/upload', async (req, res) => {
+    /* 
+        API: /api/history/upload
+        method: POST
+        uploads marker data to database
+    */
+
     const lat = req.body.lat;
     const lng = req.body.lng;
     const message = "Lat: " + lat + " Lng: " + lng
@@ -60,11 +73,16 @@ app.post('/api/history', async (req, res) => {
     })
 })
 
-app.get('/', (req, res) => {
+app.get('/api/history', (req, res) => {
+    /* 
+        API: /api/history
+        method: GET
+        response: Marker data from database
+    */
     res.send('/')
 })
 
-app.post('/history', (req, res) => {
+app.get('/', (req, res) => {
     res.send('/')
 })
 

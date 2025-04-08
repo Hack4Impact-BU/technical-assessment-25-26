@@ -3,6 +3,11 @@ import Row from "./row";
 import "./table.css";
 
 export default function Table({ data }) {
+    /* 
+        Component: Table
+        Table that displays marker history in a nice readible format.
+    */
+   
     if (!data || data.length === 0) {
         return <p style={{ color: "#ccc" }}>No history yet.</p>;
     }

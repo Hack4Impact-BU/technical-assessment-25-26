@@ -2,6 +2,11 @@ import React from "react";
 import "./title.css";
 
 export default function Title() {
+    /* 
+        Component: Title
+        App name + Animations and Design
+    */
+   
     return (
         <div className="title" onClick={() => window.open('/', '_self')}>
             <h1 className="sun-globe-text">

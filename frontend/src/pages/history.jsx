@@ -3,6 +3,12 @@ import Frame from "../components/frame/frame";
 import Table from "../components/table/table";
 
 export default function History() {
+    /* 
+        Route (Page): /history
+        Component: History
+        Surves the history page of the app, and retreives and displays history data from backend api.
+    */
+
     const [data, setData] = useState([]);
 
     useEffect(() => {
