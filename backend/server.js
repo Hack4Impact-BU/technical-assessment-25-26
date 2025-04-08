@@ -3,20 +3,22 @@ dotenv.config();
 
 const express = require('express');
 const mongoose = require('mongoose');
+const historyRoutes = require('./routes/history');
 
 const app = express();
+
+// middleware
+app.use(express.json());
 
 app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
 })
 
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Hello World'
-    })
-})
+// routes
+app.use('/api/history', historyRoutes);
 
+// connect to db
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         app.listen(process.env.PORT, () => {
