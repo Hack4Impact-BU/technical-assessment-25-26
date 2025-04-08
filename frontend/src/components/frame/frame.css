@@ -1,7 +1,7 @@
 .app-bg {
     height: 100vh;
     width: 100vw;
-    background-color: #1a2637;
+    background-color: #131a2d;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,7 @@
 .app-shell {
     width: 95vw;
     height: 95vh;
-    background-color: #0e1a2b;
+    background-color: #080b1f;
     border-radius: 20px;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
     display: flex;

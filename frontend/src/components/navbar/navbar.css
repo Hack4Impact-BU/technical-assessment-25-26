@@ -2,10 +2,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 5rem;
-    background-color: #0e1a2b;
+    padding: 0.4rem 5rem;
+    background-color: #080b1f;
     color: white;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     font-family: 'Poppins', sans-serif;
     height: 100px;
 }
@@ -25,7 +24,7 @@
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     text-decoration: none;
     transition: opacity 0.2s;
 }
@@ -37,7 +36,13 @@
 .dark-toggle {
     background: none;
     border: none;
-    color: white;
-    font-size: 1.2rem;
     cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark-toggle:hover svg {
+    opacity: 0.8;
 }

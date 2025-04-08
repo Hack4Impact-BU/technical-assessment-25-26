@@ -7,7 +7,7 @@
 }
 
 .sun-globe-text {
-    font-size: 3.8rem;
+    font-size: 4rem;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(to right, #fbc02d, #81b1be);
@@ -25,10 +25,10 @@
 
 .globe-icon {
     display: inline-block;
-    width: 0.8em;
-    height: 0.8em;
-    vertical-align: -0.1em;
-    margin: 0 4px;
+    width: 0.7em;
+    height: 1em;
+    vertical-align: -0.3em;
+    margin: 0 0;
     position: relative;
 }
 
@@ -65,7 +65,7 @@
 @keyframes sunriseUpDown {
     0%   { bottom: 10%; opacity: 0; }
     30%  { opacity: 1; }
-    50%  { bottom: 130%; opacity: 1; }
+    50%  { bottom: 95%; opacity: 1; }
     100% { bottom: 10%; opacity: 0; }
 }
 
