@@ -4,6 +4,7 @@ dotenv.config();
 const express = require('express');
 const mongoose = require('mongoose');
 const historyRoutes = require('./routes/history');
+const geminiRoutes = require('./routes/gemini');
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use('/api/history', historyRoutes);
-
+app.use('/api/gemini', geminiRoutes);
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
