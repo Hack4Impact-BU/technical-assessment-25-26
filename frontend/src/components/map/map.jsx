@@ -8,10 +8,10 @@ import "leaflet/dist/leaflet.css";
 
 // Marker Icon
 const defaultIcon = new L.Icon({
-    iconUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
-    iconSize: [25, 41],
+    iconUrl: "https://cdn2.iconfinder.com/data/icons/places-4/100/sun_place_marker_location_vacation_sunny_relax-64.png",
+    iconSize: [33, 38],
     iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
+    popupAnchor: [6, -34],
 });
 
 function MapClickHandler({ setMarkers }) {
@@ -29,7 +29,13 @@ function MapClickHandler({ setMarkers }) {
             fetch("http://localhost:3000/api/suninfo", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ lat, lng }),
+                body: JSON.stringify({ 
+                    lat, 
+                    lng,
+                    sunrise,
+                    sunset,
+                    date: (new Date()).toLocaleDateString('en-US')
+                }),
             })
                 .then(res => res.json())
                 .then(data => {

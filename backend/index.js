@@ -25,7 +25,23 @@ mongoclient.connect().then(() => {
 const genAI = new GoogleGenerativeAI(API_KEY)
 const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
-    systemInstruction: `You're helping users explore global locations with similar sunrise/sunset patterns. Given a location and its sunrise/sunset time, your job is to suggest a different part of the world (preferably with different geography or culture) that has similar times. Keep answers brief and clear, and return only the place name and region.`,
+    systemInstruction: `
+You are an assistant for exploring global locations based on sunrise and sunset patterns. Given a set of coordinates, sunrise, and sunset times for a specific date, your task is to recommend a location from a different geographical and cultural region that has similar sunrise and sunset times (within 10 minutes) on the same date.
+ 
+Your response must:
+1. Be provided strictly as a JSON object with two keys: "place" and "region".
+2. Include no additional text, explanation, or formatting.
+3. Only suggest a location if the time difference is within 10 minutes.
+4. If no valid location can be found, respond with {"place": "N/A", "region": "N/A"}.
+
+Example:
+Input: Coordinates: 35.6895, 139.6917; Sunrise: 05:30; Sunset: 18:30; Date: 2025-04-08.
+Output:
+{
+  "place": "Istanbul",
+  "region": "Turkey"
+}
+`
 })
 
 
@@ -38,7 +54,10 @@ app.post('/api/suninfo', async (req, res) => {
 
     const lat = req.body.lat;
     const lng = req.body.lng;
-    const message = "Lat: " + lat + " Lng: " + lng
+    const sunset = req.body.sunset;
+    const sunrise = req.body.sunrise;
+    const date = req.body.date;
+    const message = `Cordinates: Latitude of ${lat}, longitude of ${lng}. Sunset time: ${sunset}, and Sunrise time: ${sunrise}. On the date: ${date}.`
     let responseMessage;
     try {
         const result = await model.generateContent(message);

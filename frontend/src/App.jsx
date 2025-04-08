@@ -7,7 +7,7 @@ function App() {
   /* 
         Route (Page): /
         Component: App
-        Surves the homepage of the app, and retreives and displays map.
+        Serves the homepage of the app, and retreives and displays map.
     */
 
   return (
