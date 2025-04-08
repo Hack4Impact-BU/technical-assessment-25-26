@@ -1,26 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { generateResponse } = require('../controllers/geminiController');
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
-    systemInstruction: `TBD`,
-});
-
-router.post('/', async (req, res) => {
-    const userInput = req.body.userInput;
-    let responseMessage;
-    try {
-        const result = await model.generateContent(userInput);
-        responseMessage = result.response.text();
-    } catch (error) {
-        console.error('Error generating Gemini response:', error);
-        responseMessage = 'Oops, something went wrong!';
-    }
-    res.json({
-        message: responseMessage,
-    });
-});
+router.post('/', generateResponse);
 
 module.exports = router;
