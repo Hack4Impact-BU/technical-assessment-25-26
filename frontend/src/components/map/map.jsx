@@ -46,7 +46,11 @@ function MapClickHandler({ setMarkers }) {
                             lng,
                             sunrise,
                             sunset,
-                            geminiMatch: data.geminiLocation,
+                            geminiLocation: {
+                                place: data.place,
+                                region: data.region,
+                                info: data.info
+                            }
                         },
                     ]);
 
@@ -59,7 +63,11 @@ function MapClickHandler({ setMarkers }) {
                             lng,
                             sunrise,
                             sunset,
-                            geminiLocation: data.geminiLocation,
+                            geminiLocation: {
+                                place: data.place,
+                                region: data.region,
+                                info: data.info
+                            }
                         }),
                     });
                 });
@@ -92,7 +100,7 @@ export default function Map() {
                         <strong>Location (Lat, Lng):</strong> {marker.lat.toFixed(2)}, {marker.lng.toFixed(2)}<br />
                         <strong>Sunrise:</strong> {marker.sunrise}<br />
                         <strong>Sunset:</strong> {marker.sunset}<br />
-                        <strong>Similar Place:</strong> {marker.geminiMatch || "..."}
+                        <strong>Similar Place:</strong> {`${marker.geminiLocation.place}, ${marker.geminiLocation.region}` || "..."}
                     </Popup>
                 </Marker>
             ))}

@@ -23,6 +23,7 @@ export default function Table({ data }) {
                     <th>Sunrise</th>
                     <th>Sunset</th>
                     <th>Similar Place</th>
+                    <th>Info</th>
                 </tr>
             </thead>
             <tbody>

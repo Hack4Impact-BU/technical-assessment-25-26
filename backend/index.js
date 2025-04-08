@@ -26,20 +26,21 @@ const genAI = new GoogleGenerativeAI(API_KEY)
 const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
     systemInstruction: `
-You are an assistant for exploring global locations based on sunrise and sunset patterns. Given a set of coordinates, sunrise, and sunset times for a specific date, your task is to recommend a location from a different geographical and cultural region that has similar sunrise and sunset times (within 10 minutes) on the same date.
+You are an assistant for exploring global locations based on sunrise and sunset patterns. Given a set of coordinates, sunrise, and sunset times for a specific date, your task is to recommend a location from a different geographical region that has similar sunrise and sunset times on the same date.
  
 Your response must:
-1. Be provided strictly as a JSON object with two keys: "place" and "region".
+1. Be provided strictly as a JSON object with three keys: "place", "region", "info".
 2. Include no additional text, explanation, or formatting.
-3. Only suggest a location if the time difference is within 10 minutes.
-4. If no valid location can be found, respond with {"place": "N/A", "region": "N/A"}.
+3. Suggest a location with the closest time difference.
+4. If no valid location can be found, respond with {"place": "N/A", "region": "N/A", "info": "N/A"}, but try your best to give something.
 
 Example:
 Input: Coordinates: 35.6895, 139.6917; Sunrise: 05:30; Sunset: 18:30; Date: 2025-04-08.
 Output:
 {
   "place": "Istanbul",
-  "region": "Turkey"
+  "region": "Turkey",
+  "info": "info about Istanbul, Turkey and info about its sunrise/sunset "
 }
 `
 })
@@ -57,17 +58,20 @@ app.post('/api/suninfo', async (req, res) => {
     const sunset = req.body.sunset;
     const sunrise = req.body.sunrise;
     const date = req.body.date;
-    const message = `Cordinates: Latitude of ${lat}, longitude of ${lng}. Sunset time: ${sunset}, and Sunrise time: ${sunrise}. On the date: ${date}.`
-    let responseMessage;
+    const message = `Coordinates: ${lat}, ${lng}; Sunrise: ${sunrise}; Sunset: ${sunset}; Date: ${date}.`;
     try {
         const result = await model.generateContent(message);
-        responseMessage = result.response.text();
+        let rawText = result.response.text().trim();
+        rawText = rawText.replace(/```json|```/g, '').trim();
+        const firstBrace = rawText.indexOf("{");
+        const lastBrace = rawText.lastIndexOf("}");
+        const jsonString = rawText.slice(firstBrace, lastBrace + 1);
+        const parsed = JSON.parse(jsonString);
+        return res.json(parsed);
     } catch (e) {
-        responseMessage = 'Oops, something went wrong!'
+        console.error("Gemini error:", e);
+        return res.json({ "place": "N/A", "region": "N/A", "info": "N/A" });
     }
-    res.json({
-        geminiLocation: responseMessage,
-    })
 })
 
 app.post('/api/history/upload', async (req, res) => {
@@ -78,7 +82,7 @@ app.post('/api/history/upload', async (req, res) => {
     */
     try {
         const data = req.body;
-        if (!data.lat || !data.lng || !data.geminiLocation || !data.sunrise || !data.sunset) {
+        if (!data.lat || !data.lng || !data.geminiLocation.info || !data.sunrise || !data.sunset || !data.geminiLocation.place || !data.geminiLocation.region) {
             res.status(400).json({ message: 'Bad Request: Missing required fields' });
             return;
         }
