@@ -5,6 +5,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.table-container {
+    overflow-y: auto;
+}
+
 .history-table th,
 .history-table td {
     padding: 0.8rem 1rem;
@@ -28,3 +32,4 @@
     font-weight: bold;
     cursor: pointer;
 }
+

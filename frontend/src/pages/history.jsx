@@ -12,7 +12,7 @@ export default function History() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch("/api/history")
+        fetch("http://localhost:3000/api/history")
             .then(res => res.json())
             .then(setData)
             .catch(err => console.error("Failed to fetch history:", err));
@@ -20,7 +20,7 @@ export default function History() {
 
     return (
         <Frame>
-            <h2 style={{ color: "white", marginBottom: "1rem" }}>📍 History</h2>
+            <h2 style={{ color: "white", marginBottom: "1rem", marginLeft: "1rem" }}>History</h2>
             <Table data={data} />
         </Frame>
     );

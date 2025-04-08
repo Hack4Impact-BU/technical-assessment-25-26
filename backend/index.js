@@ -14,12 +14,13 @@ app.use(bodyParser.json())
 const PORT = process.env.PORT || 3000
 
 const API_KEY = process.env.API_KEY;
-const mongourl = process.env.MONGO_URL
+const mongourl = process.env.MONGO_URL;
 const mongoclient = new MongoClient(mongourl, {})
 
 mongoclient.connect().then(() => {
     console.log('Connected to MongoDB')
 })
+
 
 const genAI = new GoogleGenerativeAI(API_KEY)
 const model = genAI.getGenerativeModel({
@@ -42,7 +43,7 @@ app.post('/api/suninfo', async (req, res) => {
     try {
         const result = await model.generateContent(message);
         responseMessage = result.response.text();
-    } catch(e){
+    } catch (e) {
         responseMessage = 'Oops, something went wrong!'
     }
     res.json({
@@ -56,30 +57,50 @@ app.post('/api/history/upload', async (req, res) => {
         method: POST
         uploads marker data to database
     */
-
-    const lat = req.body.lat;
-    const lng = req.body.lng;
-    const message = "Lat: " + lat + " Lng: " + lng
-    let responseMessage;
     try {
-        const result = await model.generateContent(message);
-        responseMessage = result.response.text();
-    } catch(e){
-        responseMessage = 'Oops, something went wrong!'
+        const data = req.body;
+        if (!data.lat || !data.lng || !data.geminiLocation || !data.sunrise || !data.sunset) {
+            res.status(400).json({ message: 'Bad Request: Missing required fields' });
+            return;
+        }
+        await mongoclient.db('history').collection('history').insertOne(data);
+        res.status(201).json({ message: 'Success' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error' });
     }
-    res.json({
-        geminiLocation: responseMessage,
-        geminiRawResponse: responseMessage,
-    })
 })
 
-app.get('/api/history', (req, res) => {
+app.get('/api/history', async (req, res) => {
     /* 
         API: /api/history
         method: GET
         response: Marker data from database
     */
-    res.send('/')
+
+    try {
+        const data = await mongoclient.db('history').collection('history').find({}).toArray();
+        res.status(200).json(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error' });
+    }
+})
+
+app.post('/api/history/clear', async (req, res) => {
+    /* 
+       API: /api/history/clear
+       Method: POST
+       Description: Clears all marker data from the history collection.
+   */
+
+    try {
+        const result = await mongoclient.db('history').collection('history').deleteMany({});
+        res.status(200).json({ message: 'History cleared', deletedCount: result.deletedCount });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error clearing history' });
+    }
 })
 
 app.get('/', (req, res) => {

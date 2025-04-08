@@ -46,3 +46,26 @@
 .dark-toggle:hover svg {
     opacity: 0.8;
 }
+
+.clear-history-button {
+    background-color: transparent;
+    color: #ff2020;             /* Accent color that fits with your theme */
+    border: 2px solid #ff2020;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .clear-history-button:hover {
+    background-color: #ff2020;
+    color: #080b1f;            
+  }
+  
+  .clear-history-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(251,192,45, 0.5);
+  }
+  

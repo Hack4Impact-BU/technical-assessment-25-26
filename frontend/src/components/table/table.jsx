@@ -13,15 +13,16 @@ export default function Table({ data }) {
     }
 
     return (
+        <div className="table-container">
         <table className="history-table">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Lat</th>
                     <th>Lng</th>
-                    <th>Time</th>
-                    <th>Gemini Match</th>
-                    <th>Details</th>
+                    <th>Sunrise</th>
+                    <th>Sunset</th>
+                    <th>Similar Place</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,5 +31,6 @@ export default function Table({ data }) {
                 ))}
             </tbody>
         </table>
+        </div>
     );
 }

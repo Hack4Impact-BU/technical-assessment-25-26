@@ -24,8 +24,8 @@ function MapClickHandler({ setMarkers }) {
     useMapEvents({
         click(e) {
             const { lat, lng } = e.latlng;
-            const sunrise = getSunrise(lat, lng);
-            const sunset = getSunset(lat, lng);
+            const sunrise = getSunrise(lat, lng).toLocaleTimeString();
+            const sunset = getSunset(lat, lng).toLocaleTimeString();
             fetch("http://localhost:3000/api/suninfo", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -44,15 +44,16 @@ function MapClickHandler({ setMarkers }) {
                         },
                     ]);
 
+
                     fetch("http://localhost:3000/api/history/upload", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             lat,
                             lng,
-                            timestamp: new Date().toISOString(),
+                            sunrise,
+                            sunset,
                             geminiLocation: data.geminiLocation,
-                            geminiRawResponse: data.geminiRawResponse,
                         }),
                     });
                 });
@@ -82,10 +83,10 @@ export default function Map() {
             {markers.map((marker, idx) => (
                 <Marker key={idx} position={[marker.lat, marker.lng]} icon={defaultIcon}>
                     <Popup>
-                        <strong>📍 Location:</strong> {marker.lat.toFixed(2)}, {marker.lng.toFixed(2)}<br />
-                        🌅 <strong>Sunrise:</strong> {marker.sunrise.toLocaleTimeString()}<br />
-                        🌇 <strong>Sunset:</strong> {marker.sunset.toLocaleTimeString()}<br />
-                        🌎 <strong>Gemini Match:</strong> {marker.geminiMatch || "Loading..."}
+                        <strong>Location (Lat, Lng):</strong> {marker.lat.toFixed(2)}, {marker.lng.toFixed(2)}<br />
+                        <strong>Sunrise:</strong> {marker.sunrise}<br />
+                        <strong>Sunset:</strong> {marker.sunset}<br />
+                        <strong>Similar Place:</strong> {marker.geminiMatch || "..."}
                     </Popup>
                 </Marker>
             ))}
