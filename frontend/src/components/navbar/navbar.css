@@ -22,7 +22,6 @@
 }
 
 .nav-right a {
-    color: #ffffff;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 1.9rem;
@@ -69,4 +68,9 @@
     outline: none;
     box-shadow: 0 0 0 3px rgba(251,192,45, 0.5);
   }
+
+
+  .light-nav-bar {
+    background-color: #e6dddd;
+}   
   

@@ -40,7 +40,7 @@ export default function NavBar() {
   };
 
   return (
-    <div className="nav-bar">
+    <div className={`nav-bar ${!theme ? "light-nav-bar" : ""}`}>
       <div className="nav-left">
         <Title />
       </div>
@@ -50,7 +50,7 @@ export default function NavBar() {
             Clear History
           </button>
         ) : (
-          <a href="/history">History</a>
+          <a href="/history" style={{ color: theme ? 'white' : 'black' }}>History</a>
         )}
         <button className="dark-toggle" aria-label="Toggle dark mode" onClick={toggleTheme}>
           <Moon color={theme ? "white" : "black"} size={30} />

@@ -7,6 +7,10 @@
     align-items: center;
 }
 
+.light-app-bg {
+    background-color: #f0f0f0;
+}
+
 .app-shell {
     width: 95vw;
     height: 95vh;
@@ -16,4 +20,8 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+.light-app-shell {
+    background-color: #e6dddd;
 }

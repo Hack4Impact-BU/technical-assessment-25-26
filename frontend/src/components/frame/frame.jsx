@@ -10,11 +10,11 @@ export default function Frame({ children }) {
         Curved container that contains body content
     */
    
-    const [theme, setTheme] = useState(false);
+    const [theme, setTheme] = useState(true);
 
     return (
-        <div className="app-bg">
-            <div className="app-shell">
+        <div className={`app-bg ${!theme ? "light-app-bg" : ""}`}>
+            <div className={`app-shell ${!theme ? "light-app-shell" : ""}`}>
                 <ThemeContext.Provider value={[theme, setTheme]}>
                 <NavBar />
                 {children}

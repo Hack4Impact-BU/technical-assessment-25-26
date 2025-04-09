@@ -5,7 +5,6 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaf
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { getSunrise, getSunset } from 'sunrise-sunset-js';
-import "leaflet/dist/leaflet.css";
 
 // Marker Icon
 const defaultIcon = new L.Icon({
