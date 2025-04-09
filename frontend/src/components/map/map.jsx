@@ -1,5 +1,6 @@
 import "./map.css";
-import React, { useState } from "react";
+import React, { useState,  useContext } from 'react'
+import { ThemeContext } from '../frame/frame'
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -83,6 +84,7 @@ export default function Map() {
         Displays the leaflets map with its handlers.
     */
 
+    const [theme, setTheme] = useContext(ThemeContext);
     const [markers, setMarkers] = useState([]);
 
     return (

@@ -1,4 +1,5 @@
-import { useState, React } from 'react'
+import React, { useState,  useContext } from 'react'
+import { ThemeContext } from '../frame/frame'
 import "./navbar.css";
 import Title from '../../components/title/title'
 import { Moon } from 'lucide-react';
@@ -12,7 +13,9 @@ export default function NavBar() {
       Navigation bar at the top of frame.
       Includes the Title component, navigation links, and dark mode toggler.
   */
-  const [theme, setTheme] = useState(true); //TODO: Make this work in a context that updates all component styles.
+  //const [theme, setTheme] = useState(true); //TODO: Make this work in a context that updates all component styles.
+  const [theme, setTheme] = useContext(ThemeContext);
+
   const toggleTheme = () => {
     setTheme(prev => !prev);
   };

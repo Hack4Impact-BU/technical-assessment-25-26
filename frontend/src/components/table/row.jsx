@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,  useContext } from 'react'
+import { ThemeContext } from '../frame/frame'
 
 export default function Row({ item, index }) {
     /* 
         Component: Row
         Row for the History Table
     */
+
+    const [theme, setTheme] = useContext(ThemeContext);
 
     const {
         lat,

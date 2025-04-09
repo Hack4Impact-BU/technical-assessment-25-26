@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState,  useContext } from 'react'
+import { ThemeContext } from '../frame/frame'
 import Row from "./row";
 import "./table.css";
 
@@ -7,7 +8,8 @@ export default function Table({ data }) {
         Component: Table
         Table that displays marker history in a nice readible format.
     */
-   
+    const [theme, setTheme] = useContext(ThemeContext);
+
     if (!data || data.length === 0) {
         return <p style={{ color: "#ccc" }}>No history yet.</p>;
     }
