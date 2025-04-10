@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Frame from "../components/frame/frame";
+import React, { useState,  useEffect, useContext } from 'react'
+import Frame, { ThemeContext } from '../components/frame/frame'
 import Table from "../components/table/table";
 
 export default function History() {
@@ -20,7 +20,6 @@ export default function History() {
 
     return (
         <Frame>
-            <h2 style={{ color: "white", marginBottom: "1rem", marginLeft: "1rem" }}>History</h2>
             <Table data={data} />
         </Frame>
     );

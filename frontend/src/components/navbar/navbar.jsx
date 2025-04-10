@@ -1,5 +1,5 @@
 import React, { useState,  useContext } from 'react'
-import { ThemeContext } from '../frame/frame'
+import { ThemeContext, TimeContext } from '../frame/frame'
 import "./navbar.css";
 import Title from '../../components/title/title'
 import { Moon } from 'lucide-react';
@@ -15,6 +15,7 @@ export default function NavBar() {
   */
   //const [theme, setTheme] = useState(true); //TODO: Make this work in a context that updates all component styles.
   const [theme, setTheme] = useContext(ThemeContext);
+  const [timeZone, setTimeZone] = useContext(TimeContext);
 
   const toggleTheme = () => {
     setTheme(prev => !prev);
@@ -45,6 +46,20 @@ export default function NavBar() {
         <Title />
       </div>
       <div className="nav-right">
+        <div>
+          <label style={{ color: theme ? 'white' : 'black' }} htmlFor="timezone-select"><strong>Time Zone:</strong> </label>
+          <select
+            id="timezone-select"
+            value={timeZone}
+            onChange={(e) => setTimeZone(e.target.value)}
+          >
+            <option value="America/New_York">Eastern (America/New_York)</option>
+            <option value="America/Chicago">Central (America/Chicago)</option>
+            <option value="America/Los_Angeles">Pacific (America/Los_Angeles)</option>
+            <option value="UTC">UTC</option>
+            <option value="Europe/London">London (Europe/London)</option>
+          </select>
+        </div>
         {location.pathname === "/history" ? (
           <button className="clear-history-button" onClick={clearHistory}>
             Clear History

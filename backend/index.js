@@ -55,8 +55,8 @@ app.post('/api/suninfo', async (req, res) => {
 
     const lat = req.body.lat;
     const lng = req.body.lng;
-    const sunset = req.body.sunset;
-    const sunrise = req.body.sunrise;
+    const sunset = new Date(req.body.sunset).toISOString();
+    const sunrise = new Date(req.body.sunrise).toISOString();
     const date = req.body.date;
     const message = `Coordinates: ${lat}, ${lng}; Sunrise: ${sunrise}; Sunset: ${sunset}; Date: ${date}.`;
     try {

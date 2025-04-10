@@ -8,15 +8,16 @@ export default function Table({ data }) {
         Component: Table
         Table that displays marker history in a nice readible format.
     */
-    const [theme, setTheme] = useContext(ThemeContext);
+    const [theme, _] = useContext(ThemeContext);
 
     if (!data || data.length === 0) {
         return <p style={{ color: "#ccc" }}>No history yet.</p>;
     }
 
     return (
-        <div className="table-container">
-        <table className="history-table">
+        <>
+        <div className={`table-container ${!theme ? "table-container-light" : ""}`}>
+        <table className={`history-table ${!theme ? "history-table-light" : ""}`}>
             <thead>
                 <tr>
                     <th>#</th>
@@ -35,5 +36,6 @@ export default function Table({ data }) {
             </tbody>
         </table>
         </div>
+        </>
     );
 }
