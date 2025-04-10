@@ -27,7 +27,7 @@ export default function NavBar() {
   const clearHistory = async () => {
     try {
       const { browserId, signature } = await getSecureBrowserIdentity();
-  
+
       const response = await fetch("http://localhost:3000/api/history/clear", {
         method: "POST",
         headers: {
@@ -38,7 +38,7 @@ export default function NavBar() {
           signature
         }),
       });
-  
+
       if (response.ok) {
         const result = await response.json();
         console.log("History cleared:", result);
@@ -66,9 +66,14 @@ export default function NavBar() {
           >
             <option value="America/New_York">Eastern (America/New_York)</option>
             <option value="America/Chicago">Central (America/Chicago)</option>
+            <option value="America/Denver">Mountain (America/Denver)</option>
             <option value="America/Los_Angeles">Pacific (America/Los_Angeles)</option>
             <option value="UTC">UTC</option>
             <option value="Europe/London">London (Europe/London)</option>
+            <option value="Europe/Berlin">Berlin (Europe/Berlin)</option>
+            <option value="Asia/Tokyo">Tokyo (Asia/Tokyo)</option>
+            <option value="Asia/Kolkata">India (Asia/Kolkata)</option>
+            <option value="Australia/Sydney">Sydney (Australia/Sydney)</option>
           </select>
         </div>
         {location.pathname === "/history" ? (
