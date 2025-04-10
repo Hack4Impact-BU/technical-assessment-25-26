@@ -1,9 +1,10 @@
-import React, { useState,  useContext } from 'react'
+import React, { useContext } from 'react'
 import { ThemeContext, TimeContext } from '../frame/frame'
 import "./navbar.css";
 import Title from '../../components/title/title'
 import { Moon } from 'lucide-react';
 import { useLocation } from "react-router-dom";
+import { getSecureBrowserIdentity } from '../global/globalFunctions';
 
 
 
@@ -25,13 +26,23 @@ export default function NavBar() {
 
   const clearHistory = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/history/clear", { method: "POST" });
+      const { browserId, signature } = await getSecureBrowserIdentity();
+  
+      const response = await fetch("http://localhost:3000/api/history/clear", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          browserId,
+          signature
+        }),
+      });
+  
       if (response.ok) {
         const result = await response.json();
         console.log("History cleared:", result);
-
         window.location.reload();
-
       } else {
         console.error("Failed to clear history");
       }

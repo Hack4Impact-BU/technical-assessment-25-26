@@ -6,6 +6,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { getSunrise, getSunset } from 'sunrise-sunset-js';
 import { formatTime } from '../global/globalFunctions'
+import { getSecureBrowserIdentity } from '../global/globalFunctions';
 
 // Marker Icon
 const defaultIcon = new L.Icon({
@@ -23,39 +24,43 @@ function MapClickHandler({ setMarkers }) {
     */
     useMapEvents({
         click(e) {
-            const { lat, lng } = e.latlng;
-            const sunrise = getSunrise(lat, lng);
-            const sunset = getSunset(lat, lng);
-            const markerId = Date.now();
-            setMarkers(prev => [
-                ...prev,
-                {
-                    id: markerId,
-                    lat,
-                    lng,
-                    sunrise: sunrise,
-                    sunset: sunset,
-                    geminiLocation: {
-                        place: "...",
-                        region: "...",
-                        info: "..."
-                    }
-                }
-            ]);
+            (async () => {
+                const { lat, lng } = e.latlng;
+                const sunrise = getSunrise(lat, lng);
+                const sunset = getSunset(lat, lng);
+                const markerId = Date.now();
 
-            fetch("http://localhost:3000/api/suninfo", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    lat,
-                    lng,
-                    sunrise,
-                    sunset,
-                    date: (new Date()).toLocaleDateString('en-US')
-                }),
-            })
-                .then(res => res.json())
-                .then(data => {
+                setMarkers(prev => [
+                    ...prev,
+                    {
+                        id: markerId,
+                        lat,
+                        lng,
+                        sunrise,
+                        sunset,
+                        geminiLocation: {
+                            place: "...",
+                            region: "...",
+                            info: "..."
+                        }
+                    }
+                ]);
+
+                try {
+                    const res = await fetch("http://localhost:3000/api/suninfo", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            lat,
+                            lng,
+                            sunrise,
+                            sunset,
+                            date: new Date().toLocaleDateString('en-US')
+                        }),
+                    });
+
+                    const data = await res.json();
+
                     setMarkers(prev =>
                         prev.map(marker =>
                             marker.id === markerId
@@ -71,9 +76,15 @@ function MapClickHandler({ setMarkers }) {
                         )
                     );
 
-                    fetch("http://localhost:3000/api/history/upload", {
+                    const { browserId, signature } = await getSecureBrowserIdentity();
+
+                    await fetch("http://localhost:3000/api/history/upload", {
                         method: "POST",
-                        headers: { "Content-Type": "application/json" },
+                        headers: {
+                            "Content-Type": "application/json",
+                            "x-browser-id": browserId,
+                            "x-browser-signature": signature
+                        },
                         body: JSON.stringify({
                             lat,
                             lng,
@@ -86,10 +97,13 @@ function MapClickHandler({ setMarkers }) {
                             }
                         }),
                     });
-                })
-                .catch(err => console.error("API error:", err));
+                } catch (err) {
+                    console.error("API error:", err);
+                }
+            })();
         },
     });
+
     return null;
 }
 
@@ -98,7 +112,7 @@ export default function Map() {
         Component: Map
         Displays the leaflets map with its handlers.
     */
-   
+
     const [theme] = useContext(ThemeContext);
     const [markers, setMarkers] = useState([]);
     const [timeZone] = useContext(TimeContext);

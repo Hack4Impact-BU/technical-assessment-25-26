@@ -4,6 +4,8 @@ import cors from 'cors'
 import { MongoClient } from 'mongodb'
 import dotenv from 'dotenv'
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import crypto from 'crypto';
+
 
 dotenv.config()
 
@@ -45,6 +47,21 @@ Output:
 `
 })
 
+function signBrowserId(id) {
+    const secret = process.env.SIGNING_SECRET;
+    return crypto.createHmac('sha256', secret).update(id).digest('hex');
+}
+
+function isValidSignature(id, signature) {
+    const expected = signBrowserId(id);
+    return expected === signature;
+}
+
+app.get('/api/browserid', (req, res) => {
+    const id = crypto.randomUUID();
+    const signature = signBrowserId(id);
+    res.json({ browserId: id, signature });
+});
 
 app.post('/api/suninfo', async (req, res) => {
     /* 
@@ -80,19 +97,30 @@ app.post('/api/history/upload', async (req, res) => {
         method: POST
         uploads marker data to database
     */
+    const data = req.body;
+    const browserId = req.headers['x-browser-id'];
+    const signature = req.headers['x-browser-signature'];
+
+    if (
+        !browserId || !signature ||
+        !isValidSignature(browserId, signature) ||
+        !data.lat || !data.lng || !data.sunrise || !data.sunset ||
+        !data.geminiLocation || !data.geminiLocation.place || !data.geminiLocation.region || !data.geminiLocation.info
+    ) {
+        return res.status(400).json({ message: 'Bad Request or Invalid Signature' });
+    }
+
     try {
-        const data = req.body;
-        if (!data.lat || !data.lng || !data.geminiLocation.info || !data.sunrise || !data.sunset || !data.geminiLocation.place || !data.geminiLocation.region) {
-            res.status(400).json({ message: 'Bad Request: Missing required fields' });
-            return;
-        }
-        await mongoclient.db('history').collection('history').insertOne(data);
+        await mongoclient.db('history').collection('history').insertOne({
+            ...data,
+            browserId
+        });
         res.status(201).json({ message: 'Success' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error' });
     }
-})
+});
 
 app.get('/api/history', async (req, res) => {
     /* 
@@ -101,14 +129,21 @@ app.get('/api/history', async (req, res) => {
         response: Marker data from database
     */
 
+    const browserId = req.headers['x-browser-id'];
+    const signature = req.headers['x-browser-signature'];
+
+    if (!browserId || !signature || !isValidSignature(browserId, signature)) {
+        return res.status(403).json({ message: 'Invalid browser identity' });
+    }
+
     try {
-        const data = await mongoclient.db('history').collection('history').find({}).toArray();
+        const data = await mongoclient.db('history').collection('history').find({ browserId }).toArray();
         res.status(200).json(data);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error' });
+        res.status(500).json({ message: 'Error fetching history' });
     }
-})
+});
 
 app.post('/api/history/clear', async (req, res) => {
     /* 
@@ -117,14 +152,21 @@ app.post('/api/history/clear', async (req, res) => {
        Description: Clears all marker data from the history collection.
    */
 
+    const browserId = req.body.browserId;
+    const signature = req.body.signature;
+
+    if (!browserId || !signature || !isValidSignature(browserId, signature)) {
+        return res.status(403).json({ message: 'Invalid browser identity' });
+    }
+
     try {
-        const result = await mongoclient.db('history').collection('history').deleteMany({});
+        const result = await mongoclient.db('history').collection('history').deleteMany({ browserId });
         res.status(200).json({ message: 'History cleared', deletedCount: result.deletedCount });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error clearing history' });
     }
-})
+});
 
 app.get('/', (req, res) => {
     res.send('/')

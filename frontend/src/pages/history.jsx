@@ -1,6 +1,7 @@
-import React, { useState,  useEffect, useContext } from 'react'
+import React, { useState,  useEffect} from 'react'
 import Frame from '../components/frame/frame'
 import Table from "../components/table/table";
+import { getSecureBrowserIdentity } from '../components/global/globalFunctions';
 
 export default function History() {
     /* 
@@ -12,10 +13,23 @@ export default function History() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/history")
-            .then(res => res.json())
-            .then(setData)
-            .catch(err => console.error("Failed to fetch history:", err));
+        const fetchData = async () => {
+            try {
+                const { browserId, signature } = await getSecureBrowserIdentity();
+                const res = await fetch("http://localhost:3000/api/history", {
+                    headers: {
+                        "x-browser-id": browserId,
+                        "x-browser-signature": signature
+                    }
+                });
+                const result = await res.json();
+                setData(result);
+            } catch (err) {
+                console.error("Failed to fetch history:", err);
+            }
+        };
+
+        fetchData();
     }, []);
 
     return (
