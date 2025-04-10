@@ -31,7 +31,7 @@ You are an assistant for exploring global locations based on sunrise and sunset 
 Your response must:
 1. Be provided strictly as a JSON object with three keys: "place", "region", "info".
 2. Include no additional text, explanation, or formatting.
-3. Suggest a location with the closest time difference.
+3. Suggest a location with the closest time difference from the given cordinates.
 4. If no valid location can be found, respond with {"place": "N/A", "region": "N/A", "info": "N/A"}, but try your best to give something.
 
 Example:
@@ -55,8 +55,8 @@ app.post('/api/suninfo', async (req, res) => {
 
     const lat = req.body.lat;
     const lng = req.body.lng;
-    const sunset = new Date(req.body.sunset).toISOString();
-    const sunrise = new Date(req.body.sunrise).toISOString();
+    const sunset = new Date(req.body.sunset).toLocaleTimeString();
+    const sunrise = new Date(req.body.sunrise).toLocaleTimeString();
     const date = req.body.date;
     const message = `Coordinates: ${lat}, ${lng}; Sunrise: ${sunrise}; Sunset: ${sunset}; Date: ${date}.`;
     try {

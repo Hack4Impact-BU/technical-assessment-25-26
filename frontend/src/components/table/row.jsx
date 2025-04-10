@@ -1,15 +1,6 @@
 import React, { useState,  useContext } from 'react'
 import { ThemeContext, TimeContext } from '../frame/frame'
-
-function formatTime(date, timeZone) {
-    const d = new Date(date);
-    return d.toLocaleTimeString('en-US', {
-      timeZone,
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric'
-    });
-  }
+import { formatTime } from '../global/globalFunctions'
 
 export default function Row({ item, index }) {
     /* 

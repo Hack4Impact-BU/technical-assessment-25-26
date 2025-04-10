@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaf
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { getSunrise, getSunset } from 'sunrise-sunset-js';
+import { formatTime } from '../global/globalFunctions'
 
 // Marker Icon
 const defaultIcon = new L.Icon({
@@ -13,15 +14,6 @@ const defaultIcon = new L.Icon({
     iconAnchor: [12, 41],
     popupAnchor: [6, -34],
 });
-
-function formatTime(date, timeZone) {
-    return date.toLocaleTimeString('en-US', {
-      timeZone,
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric'
-    });
-  }
 
 function MapClickHandler({ setMarkers }) {
     /* 
