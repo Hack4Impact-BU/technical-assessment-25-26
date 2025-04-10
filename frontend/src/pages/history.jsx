@@ -1,5 +1,5 @@
 import React, { useState,  useEffect, useContext } from 'react'
-import Frame, { ThemeContext } from '../components/frame/frame'
+import Frame from '../components/frame/frame'
 import Table from "../components/table/table";
 
 export default function History() {

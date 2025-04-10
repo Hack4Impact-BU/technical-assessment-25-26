@@ -17,8 +17,8 @@ export default function Row({ item, index }) {
         Row for the History Table
     */
 
-    const [theme, _] = useContext(ThemeContext);
-    const [timeZone, setTimeZone] = useContext(TimeContext);
+    const [theme] = useContext(ThemeContext);
+    const [timeZone] = useContext(TimeContext);
 
     
     const {
