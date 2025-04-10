@@ -4,8 +4,7 @@ import cors from 'cors'
 import { MongoClient } from 'mongodb'
 import dotenv from 'dotenv'
 import { GoogleGenerativeAI } from '@google/generative-ai'
-import crypto from 'crypto';
-
+import { signBrowserId, validateBrowserIdentity } from '../backend/signatures.js'
 
 dotenv.config()
 
@@ -47,17 +46,13 @@ Output:
 `
 })
 
-function signBrowserId(id) {
-    const secret = process.env.SIGNING_SECRET;
-    return crypto.createHmac('sha256', secret).update(id).digest('hex');
-}
-
-function isValidSignature(id, signature) {
-    const expected = signBrowserId(id);
-    return expected === signature;
-}
 
 app.get('/api/browserid', (req, res) => {
+    /* 
+        API: /api/browserid
+        method: GET
+        response: gives the client a secure browserid and signature(backend knows these values)
+    */
     const id = crypto.randomUUID();
     const signature = signBrowserId(id);
     res.json({ browserId: id, signature });
@@ -103,12 +98,13 @@ app.post('/api/history/upload', async (req, res) => {
 
     if (
         !browserId || !signature ||
-        !isValidSignature(browserId, signature) ||
         !data.lat || !data.lng || !data.sunrise || !data.sunset ||
         !data.geminiLocation || !data.geminiLocation.place || !data.geminiLocation.region || !data.geminiLocation.info
     ) {
-        return res.status(400).json({ message: 'Bad Request or Invalid Signature' });
+        return res.status(400).json({ message: 'Bad Request: Missing required fields' });
     }
+
+    if (!validateBrowserIdentity(browserId, signature, res)) return;
 
     try {
         await mongoclient.db('history').collection('history').insertOne({
@@ -132,12 +128,19 @@ app.get('/api/history', async (req, res) => {
     const browserId = req.headers['x-browser-id'];
     const signature = req.headers['x-browser-signature'];
 
-    if (!browserId || !signature || !isValidSignature(browserId, signature)) {
-        return res.status(403).json({ message: 'Invalid browser identity' });
+    if (!browserId || !signature) {
+        return res.status(400).json({ message: 'Missing credentials' });
     }
 
+    if (!validateBrowserIdentity(browserId, signature, res)) return;
+
     try {
-        const data = await mongoclient.db('history').collection('history').find({ browserId }).toArray();
+        const data = await mongoclient
+            .db('history')
+            .collection('history')
+            .find({ browserId })
+            .toArray();
+
         res.status(200).json(data);
     } catch (error) {
         console.error(error);
@@ -155,9 +158,11 @@ app.post('/api/history/clear', async (req, res) => {
     const browserId = req.body.browserId;
     const signature = req.body.signature;
 
-    if (!browserId || !signature || !isValidSignature(browserId, signature)) {
-        return res.status(403).json({ message: 'Invalid browser identity' });
+    if (!browserId || !signature) {
+        return res.status(400).json({ message: 'Missing credentials' });
     }
+
+    if (!validateBrowserIdentity(browserId, signature, res)) return;
 
     try {
         const result = await mongoclient.db('history').collection('history').deleteMany({ browserId });

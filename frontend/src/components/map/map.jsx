@@ -1,12 +1,12 @@
 import "./map.css";
 import React, { useState, useContext } from 'react';
-import { ThemeContext, TimeContext } from '../frame/frame';
+import { ThemeContext, TimeContext } from '../frame/contexts';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { getSunrise, getSunset } from 'sunrise-sunset-js';
-import { formatTime } from '../global/globalFunctions'
-import { getSecureBrowserIdentity } from '../global/globalFunctions';
+import { formatTime } from '../global/time'
+import { getSecureBrowserIdentity } from '../global/signaturesClient';
 
 // Marker Icon
 const defaultIcon = new L.Icon({
@@ -117,10 +117,13 @@ export default function Map() {
     const [markers, setMarkers] = useState([]);
     const [timeZone] = useContext(TimeContext);
 
+    const lightTileUrl = "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png";
+    const darkTileUrl = "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png";
+
     return (
         <MapContainer center={[42.35, -71.09]} zoom={10} className="map-container">
             <TileLayer
-                url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png"
+                url={theme ? darkTileUrl : lightTileUrl}
                 attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; OpenMapTiles &copy; OpenStreetMap'
             />
             <MapClickHandler setMarkers={setMarkers} />

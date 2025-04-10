@@ -1,6 +1,6 @@
 import React, { useState,  useContext } from 'react'
-import { ThemeContext, TimeContext } from '../frame/frame'
-import { formatTime } from '../global/globalFunctions'
+import { ThemeContext, TimeContext } from '../frame/contexts';
+import { formatTime } from '../global/time'
 
 export default function Row({ item, index }) {
     /* 

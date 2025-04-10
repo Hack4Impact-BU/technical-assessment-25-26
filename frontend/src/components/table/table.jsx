@@ -1,5 +1,5 @@
-import React, { useState,  useContext } from 'react'
-import { ThemeContext } from '../frame/frame'
+import React, { useContext } from 'react'
+import { ThemeContext } from '../frame/contexts';
 import Row from "./row";
 import "./table.css";
 

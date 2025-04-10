@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import { ThemeContext, TimeContext } from '../frame/frame'
+import { ThemeContext, TimeContext } from '../frame/contexts';
 import "./navbar.css";
 import Title from '../../components/title/title'
 import { Moon } from 'lucide-react';
 import { useLocation } from "react-router-dom";
-import { getSecureBrowserIdentity } from '../global/globalFunctions';
+import { getSecureBrowserIdentity } from '../global/signaturesClient';
 
 
 
