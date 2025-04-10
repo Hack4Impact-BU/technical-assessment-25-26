@@ -13,7 +13,7 @@ export default function NavBar() {
       Navigation bar at the top of frame.
       Includes the Title component, navigation links, and dark mode toggler.
   */
-  //const [theme, setTheme] = useState(true); //TODO: Make this work in a context that updates all component styles.
+
   const [theme, setTheme] = useContext(ThemeContext);
   const [timeZone, setTimeZone] = useContext(TimeContext);
 
