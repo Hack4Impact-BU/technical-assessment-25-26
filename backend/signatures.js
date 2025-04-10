@@ -1,4 +1,7 @@
 import crypto from 'crypto';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export function signBrowserId(id) {
     const secret = process.env.SIGNING_SECRET;
