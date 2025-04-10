@@ -107,14 +107,11 @@ export default function Map() {
         Displays the leaflets map with its handlers.
     */
    
-    const [theme, _] = useContext(ThemeContext);
+    const [theme] = useContext(ThemeContext);
     const [markers, setMarkers] = useState([]);
-    const [timeZone, setTimeZone] = useContext(TimeContext);
+    const [timeZone] = useContext(TimeContext);
 
     return (
-
-        
-      
         <MapContainer center={[42.35, -71.09]} zoom={10} className="map-container">
             <TileLayer
                 url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png"

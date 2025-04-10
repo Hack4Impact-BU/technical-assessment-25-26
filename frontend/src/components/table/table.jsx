@@ -8,7 +8,7 @@ export default function Table({ data }) {
         Component: Table
         Table that displays marker history in a nice readible format.
     */
-    const [theme, _] = useContext(ThemeContext);
+    const [theme] = useContext(ThemeContext);
 
     if (!data || data.length === 0) {
         return <p style={{ color: "#ccc" }}>No history yet.</p>;
