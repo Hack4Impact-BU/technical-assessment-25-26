@@ -58,7 +58,6 @@ export default function NavBar() {
       </div>
       <div className="nav-right">
         <div>
-          <label style={{ color: theme ? 'white' : 'black' }} htmlFor="timezone-select"><strong>Time Zone:</strong> </label>
           <select
             id="timezone-select"
             value={timeZone}
