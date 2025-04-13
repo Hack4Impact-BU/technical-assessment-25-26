@@ -1,11 +1,11 @@
-# [YOUR FULL NAME]'s Submission
+# Timothy Wright's Submission
 **Date**: [date here]
 
-**BU Email**: [email here]
+**BU Email**: twrigh27@bu.edu
 
-**Class Year**: [year here]
+**Class Year**: 2028
 
-**Favorite Hobby**: [hobby here]
+**Favorite Hobby**: Sleeping
 
 ## Requirements
 Please check off which features you have implemented:
