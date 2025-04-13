@@ -1,7 +1,7 @@
 body {
     font-family: "Mina";
     background-color: #e5d9f2;
-    color: #2e073f;
+    color: #3f2207;
   }
   
   #about,
@@ -27,7 +27,7 @@ body {
   
   .project,
   .job {
-    background: #e5d9f2;
+    background: #e4f2d9;
     margin: 0 auto;
     margin-bottom: 30px;
     width: 75%;
