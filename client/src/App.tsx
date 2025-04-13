@@ -8,10 +8,8 @@ function App() {
 
   return (
     <>
-      <h1 className = "text3xl font-bold text-red-500">Hello, Tailwind Check</h1>
       <Router>
       <Navbar />
-
       <Routes> 
         <Route path="/" element={<Home />} />
         <Route path="/history" element={<History />} />
