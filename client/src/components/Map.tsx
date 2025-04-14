@@ -26,6 +26,20 @@ export default function MapView() {
       <div className="fixed inset-0 z-[998]" style={{ backgroundColor: "transparent", pointerEvents: "auto" }}onClick={(e) => {e.preventDefault();e.stopPropagation();}}/>
     );
   }
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShowCard(false);
+      }
+    };
+    if (showCard) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showCard]);
+
   const customIcon = L.icon({
     iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
     shadowUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png",
