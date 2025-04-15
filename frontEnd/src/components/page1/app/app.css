@@ -1,11 +1,9 @@
 body {
     font-family: "Mina";
-    background-color: #e5d9f2;
-    color: #3f2207;
+    background-color: #ffffff;
   }
   
-  #about,
-  #chat,
+
   #projects,
   #exp {
     width: 60%;
@@ -16,8 +14,6 @@ body {
   }
   
   #projects h2,
-  #about h2,
-  #chat h2,
   #exp h2 {
     text-align: center;
     font-size: 35px;
