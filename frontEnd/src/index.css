@@ -9,11 +9,3 @@
     scroll-behavior: smooth;
   }
 
-  .leaflet-container {
-    margin: auto;
-    width: 50%;
-    height: 400px;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-  }
