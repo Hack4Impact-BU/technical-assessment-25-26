@@ -1,5 +1,6 @@
-import { useState } from "react"; 
+import { useState, useEffect } from "react"; 
 import ToggleSwitch from "./toggle";
+
 
 type LocationPopupProps = {
     lat: number;
@@ -7,9 +8,51 @@ type LocationPopupProps = {
     onClose: () => void;
   };
   
-export default function LocationPopup({ onClose }: LocationPopupProps) {
-  const [viewSunrise, setViewSunrise] = useState(true);
-  const [showTwin, setShowTwin] = useState(false);
+export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps) {
+  const [viewSunrise, setViewSunrise]= useState(true);
+  const [showTwin, setShowTwin]= useState(false);
+  const [sunData, setSunData]= useState<{ sunrise: string; sunset: string } | null>(null);
+  useEffect(() =>{
+    const fetchSunData=async ()=> {
+      try {
+        const response= await fetch("http://localhost:3001/api/sun", {
+          method: "POST",
+          headers: {
+            "Content-Type":"application/json",
+          },
+          body: JSON.stringify({ lat, lng }),
+        });
+        const data=await response.json();
+        setSunData(data);
+        console.log("Data",data);
+      } catch (error){
+        console.error("Error fetching sun data:", error);
+      }
+    };
+  
+    fetchSunData();
+  }, [lat, lng]);
+  useEffect(() => {
+    if (showTwin && sunData) {
+      const fetchTwinData = async () => {
+        try {
+          const response = await fetch("http://localhost:3001/api/twin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(sunData),
+          });
+          const data = await response.json();
+          console.log("Twin data:", data);
+        } catch (err) {
+          console.error("Error:", err);
+        }
+      };
+  
+      fetchTwinData();
+    }
+  }, [showTwin, sunData]);
     return (
 <div className="transition-all duration-300 ease-in-out">
   <div className="fixed inset-0 z-[999] flex items-center justify-center">
@@ -33,18 +76,20 @@ export default function LocationPopup({ onClose }: LocationPopupProps) {
           <ToggleSwitch enabled={showTwin} onToggle={() => setShowTwin(!showTwin)} />
         </div>
       </div>
-      {showTwin ? (
-        viewSunrise ? (
-          <div className="text-yellow-600">🌍 Twin Sunrise Time: 6:12 AM</div>
+      {sunData ? (
+        showTwin ? (
+          <p>Twin data</p>
+        ) : viewSunrise ? (
+          <p className="text-yellow-600">
+            📍 Sunrise: {new Date(sunData.sunrise).toLocaleTimeString()}
+          </p>
         ) : (
-          <div className="text-purple-600">🌍 Twin Sunset Time: 7:40 PM</div>
+          <p className="text-purple-600">
+            📍 Sunset: {new Date(sunData.sunset).toLocaleTimeString()}
+          </p>
         )
       ) : (
-        viewSunrise ? (
-          <div className="text-yellow-600">📍 Your Sunrise Time: 6:15 AM</div>
-        ) : (
-          <div className="text-purple-600">📍 Your Sunset Time: 7:42 PM</div>
-        )
+        <p>Loading sun data...</p>
       )}
     </div>
   </div>
