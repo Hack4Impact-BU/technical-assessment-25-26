@@ -8,7 +8,7 @@ export default function ToggleSwitch({ enabled, onToggle }: ToggleSwitchProps) {
       <div
         onClick={onToggle}
         className= {`w-12 h-6 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer transition duration-300 ${
-          enabled? 'bg-yellow-400' : 'bg-purple-500'
+          enabled? 'bg-purple-500' : 'bg-yellow-400'
         }`}
       >
         <div

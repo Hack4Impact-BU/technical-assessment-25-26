@@ -1,10 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-
 import sunRoutes from "./routes/sun.js";
 import twinRoutes from "./routes/twin.js";
-
 dotenv.config();
 
 const app = express();
