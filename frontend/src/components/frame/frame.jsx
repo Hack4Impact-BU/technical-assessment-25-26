@@ -11,7 +11,7 @@ export default function Frame({ children }) {
 
     const [theme, setTheme] = useState(() => {
         const savedTheme = localStorage.getItem("theme");
-        return savedTheme !== null ? JSON.parse(savedTheme) : true;
+        return savedTheme !== null ? JSON.parse(savedTheme) : false;
     });
 
     const [timeZone, setTimeZone] = useState(() => {
