@@ -1,18 +1,24 @@
-import Map from "./components/Map/Map";
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import MapPage from "./pages/MapPage";
+import History from "./pages/History";
 
 function App() {
   return (
-    <div className="App">
-      <header className="text-center py-4">
-        <h1 className="text-4xl font-bold">
-          SunSpot
-        </h1>
-      </header>
-      <div className="flex justify-center items-center">
-        <Map />
+    <BrowserRouter>
+      <div className="App">
+        <Navbar />
+        <main className="flex justify-center items-center p-4">
+          <Routes>
+            <Route path="/" element={<Navigate to="/map" replace />} />
+            <Route path="/map" element={<MapPage />} />
+            <Route path="/history" element={<History />} />
+          </Routes>
+        </main>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
-export default App
+export default App;
