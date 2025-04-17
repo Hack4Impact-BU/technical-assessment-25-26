@@ -1,11 +1,11 @@
-# [YOUR FULL NAME]'s Submission
-**Date**: [date here]
+# Eddie Lu's Submission
+**Date**: 4/17/24
 
-**BU Email**: [email here]
+**BU Email**: adefifp@bu.edu
 
-**Class Year**: [year here]
+**Class Year**: 2027
 
-**Favorite Hobby**: [hobby here]
+**Favorite Hobby**: Volleyball
 
 ## Requirements
 Please check off which features you have implemented:

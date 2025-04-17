@@ -11,8 +11,9 @@ const historySchema = new mongoose.Schema({
     country_code: String,
   },
   twin: {
+    latitude: Number,
+    longitude: Number,
     location: String,
-    summary_location: String,
     sunrise: String,
     sunset: String,
     fun_fact: String,

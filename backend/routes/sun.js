@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
     const { location, description, country_code } = await getLocationDescription({ lat, lng });
     res.json({ sunrise, sunset, country_code, location, description });
   } catch (error) {
-    console.error("❌ Error in /api/sun:", error);
+    console.error("Error in /api/sun:", error);
     res.status(500).json({ error: "Failed to fetch location data." });
   }
 });
