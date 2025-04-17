@@ -1,11 +1,11 @@
-# [Ethan Lee]'s Submission
-**Date**: [04-17-2025]
+# Ethan Lee's Submission
+**Date**: 04-17-2025
 
-**BU Email**: [buerlee@bu.edu]
+**BU Email**: buerlee@bu.edu
 
-**Class Year**: [2027]
+**Class Year**: 2027
 
-**Favorite Hobby**: [reading]
+**Favorite Hobby**: reading
 
 ## Requirements
 Please check off which features you have implemented:
