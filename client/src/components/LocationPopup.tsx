@@ -28,6 +28,36 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
   } | null>(null);
   const [loadingTwin, setLoadingTwin] = useState(false);
 
+  const saveToHistory = async (clicked: SunData, twin: typeof twinData) => {
+    if (!twin) return;
+  
+    try {
+      const response = await fetch("http://localhost:3001/api/history", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          clickedData: {
+            latitude: lat,
+            longitude: lng,
+            sunrise: clicked.sunrise,
+            sunset: clicked.sunset,
+            location: clicked.location,
+            description: clicked.description,
+            country_code: clicked.country_code,
+          },
+          twinData: twin,
+        }),
+      });
+  
+      const result = await response.json();
+      console.log("🗂️ History saved:", result);
+    } catch (err) {
+      console.error("❌ Failed to save history:", err);
+    }
+  };
+
   useEffect(() => {
     const fetchSunData = async () => {
       try {
@@ -62,6 +92,9 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
           const data = await response.json();
           console.log("🌍 Twin Data (frontend):", data);
           setTwinData(data);
+      
+          // 🧠 Save to history after twinData is successfully fetched
+        await saveToHistory(sunData, data);
         } catch (err) {
           console.error("Error fetching twin data:", err);
         } finally {

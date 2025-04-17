@@ -46,3 +46,27 @@ Find a city in a different part of the world with a similar sunrise (${sunrise})
     throw new Error("Gemini response could not be parsed.");
   }
 }
+
+  export async function summarizeTwinLocation(twinFunFact) {
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+    const prompt = `
+  From this location description:
+  "${twinFunFact}"
+
+  Give me a JSON response in this format:
+  { "summaryLocation": "City, Country" }
+
+  No explanation or formatting.
+    `;
+
+    try {
+      const result = await model.generateContent(prompt);
+      const responseText = result.response.text().trim();
+      const match = responseText.match(/{[\s\S]*}/);
+      return match ? JSON.parse(match[0]) : null;
+    } catch (err) {
+      console.error("❌ Failed to summarize twin location:", err);
+      return null;
+    }
+  }
