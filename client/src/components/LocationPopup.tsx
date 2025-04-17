@@ -32,7 +32,7 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
     if (!twin) return;
   
     try {
-      const response = await fetch("http://localhost:3001/api/history", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/history`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
   useEffect(() => {
     const fetchSunData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/sun", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/sun`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ lat, lng }),
@@ -82,7 +82,7 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
       const fetchTwinData = async () => {
         setLoadingTwin(true);
         try {
-          const response = await fetch("http://localhost:3001/api/twin", {
+          const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/twin`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
