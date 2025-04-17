@@ -1,36 +1,64 @@
 import { useState, useEffect } from "react";
 import { Marker, Popup, useMapEvents } from "react-leaflet";
-import { getSunrise, getSunset } from 'sunrise-sunset-js';
+import { getSunrise, getSunset } from "sunrise-sunset-js";
 
 function LocationMarker() {
   const [position, setPosition] = useState(null);
   const [sunrise, setSunrise] = useState(null);
   const [sunset, setSunset] = useState(null);
+  const [similar, setSimilar] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const formatTime = (date) =>
+    date.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZoneName: "short",
+    });
 
   useEffect(() => {
-    const fetchSunriseSunset = async () => {
-      try {
-        const sunriseTime = await getSunrise(position.lat, position.lng);
-        const sunsetTime = await getSunset(position.lat, position.lng);
-        
-        // Convert to local time and format
-        const formatTime = (date) => {
-          return date.toLocaleTimeString([], { 
-            hour: '2-digit', 
-            minute: '2-digit',
-            timeZoneName: 'short'
-          });
-        };
+    if (!position) return;
 
-        setSunrise(formatTime(sunriseTime));
-        setSunset(formatTime(sunsetTime));
+    const fetchSimilar = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const srDate = await getSunrise(position.lat, position.lng);
+        const ssDate = await getSunset(position.lat, position.lng);
+
+        const formattedSunrise = formatTime(srDate);
+        const formattedSunset = formatTime(ssDate);
+
+        setSunrise(formattedSunrise);
+        setSunset(formattedSunset);
+
+        const response = await fetch(`http://localhost:3000/api/gemini`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            originalLocation: position,
+            originalSunrise: formattedSunrise,
+            originalSunset: formattedSunset,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Status ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        setSimilar(data);
       } catch (error) {
-        console.error('Error fetching sunrise/sunset:', error);
+        console.error("Gemini request failed:", error);
+        setError(error.message || "Unknown error");
+      } finally {
+        setLoading(false);
       }
-    }
-    if (position) {
-      fetchSunriseSunset();
-    }
+    };
+
+    fetchSimilar();
   }, [position]);
 
   useMapEvents({
@@ -43,19 +71,42 @@ function LocationMarker() {
     },
   });
 
-  return position === null ? null : (
+  if (!position) return null;
+
+  return (
     <Marker position={position}>
-      <Popup>
-        <div className="text-center">
-          <h3 className="font-bold mb-2">Location Details</h3>
-          <p>Latitude: {position.lat.toFixed(4)}</p>
-          <p>Longitude: {position.lng.toFixed(4)}</p>
-          {sunrise && <p>Sunrise: {sunrise}</p>}
-          {sunset && <p>Sunset: {sunset}</p>}
+      <Popup minWidth={240}>
+        <div className="space-y-2 text-sm">
+          <div>
+            <strong>Coordinates:</strong> {position.lat},{" "}
+            {position.lng}
+          </div>
+          <div>
+            <strong>Sunrise:</strong> {sunrise || "…"}
+          </div>
+          <div>
+            <strong>Sunset:</strong> {sunset || "…"}
+          </div>
+
+          {loading && <div className="italic">Finding similar place…</div>}
+          {error && <div className="text-red-500">Error: {error}</div>}
+
+          {similar && !loading && !error && (
+            <div className="border-t pt-2">
+              <strong>Similar Place:</strong>
+              <div>{similar.name}</div>
+              <div>
+                {similar.latitude}, {similar.longitude}
+              </div>
+              <div>
+                {similar.sunriseTime} – {similar.sunsetTime}
+              </div>
+            </div>
+          )}
         </div>
       </Popup>
     </Marker>
   );
 }
 
-export default LocationMarker; 
+export default LocationMarker;

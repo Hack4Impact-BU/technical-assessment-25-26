@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const historyRoutes = require('./routes/history');
 const geminiRoutes = require('./routes/gemini');
@@ -9,6 +10,7 @@ const geminiRoutes = require('./routes/gemini');
 const app = express();
 
 // middleware
+app.use(cors());
 app.use(express.json());
 
 app.use((req, res, next) => {

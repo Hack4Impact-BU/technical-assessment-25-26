@@ -11,6 +11,8 @@ const model = genAI.getGenerativeModel({
             •	Latitude and Longitude
             •	Sunrise Time and Sunset Time
 
+        **IMPORTANT:** Respond with _only_ the raw JSON object—no markdown fences, no backticks, no commentary.
+
         Ensure that the returned location is distinctly different from the original one while maintaining the similarity in daylight timings. Reprompt yourself if you are not sure about the answer.
 
         Additional Considerations:
@@ -25,20 +27,28 @@ const model = genAI.getGenerativeModel({
 });
 
 const generateResponse = async (req, res) => {
-  const userInput = req.body.userInput;
-  let responseMessage;
+  const { originalLocation, originalSunrise, originalSunset } = req.body;
+  const date = new Date().toISOString().split("T")[0];
+
   try {
-    const result = await model.generateContent(userInput);
-    responseMessage = result.response.text();
+    const prompt = `Original location: ${originalLocation}, originalSunrise: ${originalSunrise}, originalSunet: ${originalSunset}; Date: ${date}.`;
+
+    const result = await model.generateContent(prompt);
+
+    const text = await result.response.text();
+    const raw = JSON.parse(text);
+    const transformed = {
+      name: raw["Location Name"],
+      latitude: raw["Latitude"],
+      longitude: raw["Longitude"],
+      sunriseTime: raw["Sunrise Time"],
+      sunsetTime: raw["Sunset Time"],
+    };
+    res.json(transformed);
   } catch (error) {
     console.error("Error generating Gemini response:", error);
     responseMessage = "Oops, something went wrong!";
   }
-  res.json({
-    message: responseMessage,
-  });
 };
 
-module.exports = {
-  generateResponse,
-};
+module.exports = { generateResponse };
