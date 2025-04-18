@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌅 Impact Team Technical Assessment 2025-2026 🌅
 Congratulations on reaching the next step of the application process! This phase is the most important one in the entire process, as it assesses your ability to create a web app using both tools you're familiar with and ones you probably aren't and will have to pick up as you go. This is one of the most important skills for a web developer to cultivate.
 
