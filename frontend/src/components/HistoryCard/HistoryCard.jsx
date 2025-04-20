@@ -1,27 +1,23 @@
 import React from "react";
 
-export default function HistoryCard({
-  name,
-  latitude,
-  longitude,
-  sunriseTime,
-  sunsetTime,
-  createdAt,
-}) {
+export default function HistoryCard({ latitude, longitude, geminiResponse }) {
   return (
-    <div className="bg-white border rounded-2xl p-6 shadow-lg w-full max-w-lg mx-auto">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold text-gray-800">{name}</h2>
-        <span className="text-sm text-gray-500">
-          {new Date(createdAt).toLocaleString()}
-        </span>
+    <div className="max-w-md rounded-2xl shadow-md p-4 bg-white">
+      <h2 className="text-xl font-semibold mb-2">History Entry</h2>
+      <div className="space-y-1">
+        <p>
+          <span className="font-medium">Latitude:</span> {latitude}
+        </p>
+        <p>
+          <span className="font-medium">Longitude:</span> {longitude}
+        </p>
       </div>
-      <div className="text-base text-gray-700 mb-2">
-        <strong>Coords:</strong> {latitude}, {longitude}
-      </div>
-      <div className="text-base text-gray-700">
-        <strong>Sunrise – Sunset:</strong> {sunriseTime} – {sunsetTime}
-      </div>
+      <h3 className="text-lg font-semibold mt-4 mb-2">Gemini Response</h3>
+      <pre className="whitespace-pre-wrap text-sm bg-gray-50 p-2 rounded-lg">
+        {typeof geminiResponse === "string"
+          ? geminiResponse
+          : JSON.stringify(geminiResponse, null, 2)}
+      </pre>
     </div>
   );
 }

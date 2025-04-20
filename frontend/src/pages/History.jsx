@@ -8,9 +8,7 @@ export default function History() {
   useEffect(() => {
     fetch("http://localhost:3000/api/history")
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
+        if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
       })
       .then((data) => {
@@ -26,26 +24,32 @@ export default function History() {
   if (loading) {
     return <p>Loading search history…</p>;
   }
-
   if (entries.length === 0) {
     return <p>No history yet.</p>;
   }
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Search History</h1>
+      <h1 className="text-2xl font-bold mb-6">Search History</h1>
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {entries.map((item) => {
+          let geminiData;
+          try {
+            geminiData = JSON.parse(item.googleGeminiResponse);
+          } catch {
+            geminiData = { raw: item.googleGeminiResponse };
+          }
 
-      {entries.map((item) => (
-        <HistoryCard
-          key={item._id}
-          name={item.name}
-          latitude={item.latitude}
-          longitude={item.longitude}
-          sunriseTime={item.sunriseTime}
-          sunsetTime={item.sunsetTime}
-          createdAt={item.createdAt}
-        />
-      ))}
+          return (
+            <HistoryCard
+              key={item._id}
+              latitude={item.latitude}
+              longitude={item.longitude}
+              geminiResponse={geminiData}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
