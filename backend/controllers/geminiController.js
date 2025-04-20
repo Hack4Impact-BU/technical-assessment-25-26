@@ -44,6 +44,17 @@ const generateResponse = async (req, res) => {
       sunriseTime: raw["Sunrise Time"],
       sunsetTime: raw["Sunset Time"],
     };
+
+    await fetch("http://localhost:3000/api/history", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        latitude: transformed.latitude,
+        longitude: transformed.longitude,
+        googleGeminiResponse: JSON.stringify(transformed)
+      }),
+    });
+
     res.json(transformed);
   } catch (error) {
     console.error("Error generating Gemini response:", error);
