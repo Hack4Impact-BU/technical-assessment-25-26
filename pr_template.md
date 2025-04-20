@@ -1,11 +1,11 @@
-# [YOUR FULL NAME]'s Submission
+# AJ Hardimon's Submission
 **Date**: [date here]
 
-**BU Email**: [email here]
+**BU Email**: ajh756@bu.edu
 
-**Class Year**: [year here]
+**Class Year**: 2027
 
-**Favorite Hobby**: [hobby here]
+**Favorite Hobby**: D&D
 
 ## Requirements
 Please check off which features you have implemented:
