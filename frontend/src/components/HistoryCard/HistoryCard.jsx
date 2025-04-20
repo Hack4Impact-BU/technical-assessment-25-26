@@ -14,9 +14,7 @@ export default function HistoryCard({ latitude, longitude, geminiResponse }) {
       </div>
       <h3 className="text-lg font-semibold mt-4 mb-2">Gemini Response</h3>
       <pre className="whitespace-pre-wrap text-sm bg-gray-50 p-2 rounded-lg">
-        {typeof geminiResponse === "string"
-          ? geminiResponse
-          : JSON.stringify(geminiResponse, null, 2)}
+        {geminiResponse.name}
       </pre>
     </div>
   );
