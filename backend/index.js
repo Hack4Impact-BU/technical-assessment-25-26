@@ -10,7 +10,7 @@ dotenv.config()
 
 const app = express()
 app.use(cors({
-    origin: process.env.FRONTEND || '*'   // lock it down to your frontend URL in prod
+    origin: process.env.FRONTEND
   }))
 app.use(bodyParser.json())
 
