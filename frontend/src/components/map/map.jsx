@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { getSunrise, getSunset } from 'sunrise-sunset-js';
 import { formatTime } from '../global/time'
-import { getSecureBrowserIdentity } from '../global/signaturesClient';
+import { getSecureBrowserIdentity, API_URL } from '../global/signaturesClient';
 
 // Marker Icon
 const defaultIcon = new L.Icon({
@@ -47,7 +47,7 @@ function MapClickHandler({ setMarkers }) {
                 ]);
 
                 try {
-                    const res = await fetch("http://localhost:3000/api/suninfo", {
+                    const res = await fetch(`${API_URL}/api/suninfo`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
@@ -78,7 +78,7 @@ function MapClickHandler({ setMarkers }) {
 
                     const { browserId, signature } = await getSecureBrowserIdentity();
 
-                    await fetch("http://localhost:3000/api/history/upload", {
+                    await fetch(`${API_URL}/api/history/upload`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

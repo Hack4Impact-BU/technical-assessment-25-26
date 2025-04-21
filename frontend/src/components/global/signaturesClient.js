@@ -7,6 +7,7 @@ export function getBrowserId() { //Old way not secure
     return id;
 }
 
+export const API_URL = process.env.BACKEND
 
 export async function getSecureBrowserIdentity() {
     const stored = localStorage.getItem('browserIdentity');

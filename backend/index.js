@@ -9,7 +9,9 @@ import { signBrowserId, validateBrowserIdentity } from '../backend/signatures.js
 dotenv.config()
 
 const app = express()
-app.use(cors())
+app.use(cors({
+    origin: process.env.FRONTEND || '*'   // lock it down to your frontend URL in prod
+  }))
 app.use(bodyParser.json())
 
 const PORT = process.env.PORT || 3000

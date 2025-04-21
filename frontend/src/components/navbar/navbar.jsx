@@ -4,7 +4,7 @@ import "./navbar.css";
 import Title from '../../components/title/title'
 import { Moon } from 'lucide-react';
 import { useLocation } from "react-router-dom";
-import { getSecureBrowserIdentity } from '../global/signaturesClient';
+import { getSecureBrowserIdentity, API_URL } from '../global/signaturesClient';
 
 
 
@@ -28,7 +28,7 @@ export default function NavBar() {
     try {
       const { browserId, signature } = await getSecureBrowserIdentity();
 
-      const response = await fetch("http://localhost:3000/api/history/clear", {
+      const response = await fetch(`${API_URL}/api/history/clear`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
