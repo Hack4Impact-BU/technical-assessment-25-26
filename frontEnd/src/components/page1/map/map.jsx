@@ -6,10 +6,21 @@ import './map.css'
 function Map() {
     const [position, setPosition] = React.useState([42.349998, -71.10315352])
 
+    async function postPosition() {
+        await fetch('http://localhost:4000/positions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ lat: position.lat, lng: position.lng }),
+        })
+    }
+
     function SetLocation() {
         useMapEvents({
             click(e) {
                 setPosition(e.latlng)
+                postPosition()
             },
         })
     }

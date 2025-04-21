@@ -1,0 +1,10 @@
+table {
+    width: 50%;
+    font-size: 1.2rem;
+    text-align: left;
+    background-color: #f2f2f2;
+    flex-direction: column;
+    row-gap: 10px;
+    margin: 0 auto;
+    align-items: center;
+}
