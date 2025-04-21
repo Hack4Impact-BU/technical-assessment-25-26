@@ -112,13 +112,14 @@ export default function Map() {
         Component: Map
         Displays the leaflets map with its handlers.
     */
+    const STADIA_KEY = import.meta.env.VITE_STADIA_API_KEY;
 
     const [theme] = useContext(ThemeContext);
     const [markers, setMarkers] = useState([]);
     const [timeZone] = useContext(TimeContext);
 
-    const lightTileUrl = "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png";
-    const darkTileUrl = "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png";
+    const lightTileUrl = `https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png?api_key=${STADIA_KEY}`;
+    const darkTileUrl  = `https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=${STADIA_KEY}`;
 
     return (
         <MapContainer center={[42.35, -71.09]} zoom={10} className="map-container">
