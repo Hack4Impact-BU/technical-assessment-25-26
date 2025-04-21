@@ -1,7 +1,7 @@
 import React, { useState,  useEffect} from 'react'
 import Frame from '../components/frame/frame'
 import Table from "../components/table/table";
-import { getSecureBrowserIdentity, API_URL } from '../global/signaturesClient';
+import { getSecureBrowserIdentity, API_URL } from '../components/global/signaturesClient';
 
 export default function History() {
     /* 

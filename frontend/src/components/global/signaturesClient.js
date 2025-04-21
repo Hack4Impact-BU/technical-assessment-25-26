@@ -7,14 +7,14 @@ export function getBrowserId() { //Old way not secure
     return id;
 }
 
-export const API_URL = process.env.BACKEND
+export const API_URL = import.meta.env.VITE_BACKEND
 
 export async function getSecureBrowserIdentity() {
     const stored = localStorage.getItem('browserIdentity');
     if (stored) {
         const { browserId, signature } = JSON.parse(stored);
 
-        const test = await fetch("http://localhost:3000/api/history", {
+        const test = await fetch(`${API_URL}/api/history`, {
             method: "GET",
             headers: {
                 "x-browser-id": browserId,
@@ -37,7 +37,7 @@ export async function getSecureBrowserIdentity() {
         return { browserId, signature };
     }
 
-    const res = await fetch('http://localhost:3000/api/browserid');
+    const res = await fetch(`${API_URL}/api/browserid`);
     const identity = await res.json();
     localStorage.setItem('browserIdentity', JSON.stringify(identity));
     return identity;
