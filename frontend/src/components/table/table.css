@@ -1,0 +1,73 @@
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.table-container {
+    overflow-y: auto;
+}
+
+.history-table th,
+.history-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.history-table th {
+    background: #2c4068;
+    font-weight: 600;
+}
+
+.history-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.history-table button {
+    background: none;
+    border: none;
+    color: #fbc02d;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* inverted */
+
+.history-table-light {
+    width: 100%;
+    border-collapse: collapse;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}
+
+.table-container-light {
+    overflow-y: auto;
+}
+
+.history-table-light th,
+.history-table-light td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.history-table-light th {
+    background: #a5b3ce;
+    font-weight: 600;
+}
+
+.history-table-light tr:hover {
+    background-color: rgba(35, 145, 248, 0.5);
+}
+
+.history-table-light button {
+    background: none;
+    border: none;
+    color: #0074f8;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+

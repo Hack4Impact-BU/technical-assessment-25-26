@@ -1,0 +1,27 @@
+.app-bg {
+    height: 100vh;
+    width: 100vw;
+    background-color: #131a2d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.light-app-bg {
+    background-color: #f0f0f0;
+}
+
+.app-shell {
+    width: 95vw;
+    height: 95vh;
+    background-color: #080b1f;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.light-app-shell {
+    background-color: white;
+}
