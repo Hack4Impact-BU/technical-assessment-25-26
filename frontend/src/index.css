@@ -1,1 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Schoolbell&display=swap");
+
 @import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: "Schoolbell", sans-serif;
+  }
+  .leaflet-container,
+  .leaflet-popup-content-wrapper,
+  .leaflet-popup-content {
+    font-family: "Schoolbell", sans-serif;
+  }
+}
