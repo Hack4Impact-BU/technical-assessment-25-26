@@ -14,7 +14,7 @@ export default function MapView(){
   function MapClickHandler({onMapClick,onMapReset,}:{onMapClick: (latlng: [number, number])=>void;onMapReset: () =>void;}) {
     useMapEvents({
       click(event){
-        const { lat, lng } = event.latlng;
+        const { lat,lng } = event.latlng;
         onMapClick([lat, lng]);
         onMapReset();
       },
@@ -47,7 +47,6 @@ export default function MapView(){
     iconAnchor: [12, 41],
     popupAnchor: [1,-34],
   });
-
   function MapInteractionToggle({enabled }:{ enabled:boolean }) {
     const map= useMap();
     useEffect(() =>{

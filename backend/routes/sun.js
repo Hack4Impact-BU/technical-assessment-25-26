@@ -4,13 +4,13 @@ import { getLocationDescription } from "../utils/youGemini.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-  const { lat, lng } = req.body;
+router.post("/", async (req, res)=> {
+  const { lat, lng }= req.body;
 
   try {
     const sunrise = getSunrise(lat, lng).toISOString();
     const sunset = getSunset(lat, lng).toISOString();
-    const { location, description, country_code } = await getLocationDescription({ lat, lng });
+    const {location, description, country_code}= await getLocationDescription({ lat, lng });
     res.json({ sunrise, sunset, country_code, location, description });
   } catch (error) {
     console.error("Error in /api/sun:", error);

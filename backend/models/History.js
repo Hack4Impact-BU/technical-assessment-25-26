@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const historySchema = new mongoose.Schema({
+const historySchema =new mongoose.Schema({
   clicked: {
     latitude: Number,
     longitude: Number,

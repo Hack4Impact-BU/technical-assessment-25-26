@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import ToggleSwitch from "./Toggle";
 
+
 type LocationPopupProps = {
   lat: number;
   lng: number;
-  onClose: () => void;
+  onClose:() => void;
 };
 
 type SunData = {
@@ -18,8 +19,8 @@ type SunData = {
 export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps) {
   const [viewSunrise, setViewSunrise] = useState(true);
   const [showTwin, setShowTwin] = useState(false);
-  const [sunData, setSunData] = useState<SunData | null>(null);
-  const [twinData, setTwinData] = useState<{
+  const [sunData,setSunData] = useState<SunData | null>(null);
+  const [twinData,setTwinData] = useState<{
     location: string;
     sunrise: string;
     sunset: string;
@@ -28,7 +29,7 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
   } | null>(null);
   const [loadingTwin, setLoadingTwin] = useState(false);
 
-  const saveToHistory = async (clicked: SunData, twin: typeof twinData) => {
+  const saveToHistory =async (clicked: SunData,twin: typeof twinData) => {
     if (!twin) return;
   
     try {
@@ -52,9 +53,9 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
       });
   
       const result = await response.json();
-      console.log("🗂️ History saved:", result);
+      console.log("History saved:", result);
     } catch (err) {
-      console.error("❌ Failed to save history:", err);
+      console.error("Failed to save history:", err);
     }
   };
 
@@ -62,12 +63,12 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
     const fetchSunData = async () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/sun`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method:"POST",
+          headers:{ "Content-Type": "application/json" },
           body: JSON.stringify({ lat, lng }),
         });
         const data = await response.json();
-        console.log("🌅 Marked location data:", data);
+        console.log("Marked location data:", data);
         setSunData(data);
       } catch (error) {
         console.error("Error fetching sun data:", error);
@@ -77,23 +78,22 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
     fetchSunData();
   }, [lat, lng]);
 
-  useEffect(() => {
+  useEffect(()=>{
     if (showTwin && sunData && !twinData) {
       const fetchTwinData = async () => {
         setLoadingTwin(true);
         try {
           const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/twin`, {
-            method: "POST",
+            method:"POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(sunData),
           });
           const data = await response.json();
-          console.log("🌍 Twin Data (frontend):", data);
+          console.log("Twin Data (frontend):", data);
           setTwinData(data);
-      
-          // 🧠 Save to history after twinData is successfully fetched
+
         await saveToHistory(sunData, data);
         } catch (err) {
           console.error("Error fetching twin data:", err);
@@ -107,15 +107,11 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
   }, [showTwin, sunData, twinData]);
 
   const displayTime = (time: string) => {
-    // If it's already an ISO string (from `sunrise-sunset-js`), just parse it
     const parsedDate = new Date(time);
   
     if (!isNaN(parsedDate.getTime())) {
-      // Valid full date (e.g. "2025-04-16T06:18:00Z")
       return parsedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     }
-  
-    // Otherwise, it's probably just a time string (e.g. "6:18 AM")
     const today = new Date().toDateString();
     const fallbackDate = new Date(`${today} ${time}`);
   
@@ -137,7 +133,7 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
           <div className="flex items-center gap-6 my-4 flex-wrap">
           <div className="flex items-center gap-2">
             <span className="font-medium">🌅 Sunrise</span>
-            <ToggleSwitch enabled={!viewSunrise} onToggle={() => setViewSunrise(!viewSunrise)} />
+            <ToggleSwitch enabled={!viewSunrise}onToggle={() => setViewSunrise(!viewSunrise)} />
             <span className="font-medium">🌇 Sunset</span>
           </div>
           <div className="flex items-center gap-2">
@@ -179,9 +175,9 @@ export default function LocationPopup({ lat, lng, onClose }: LocationPopupProps)
             />
           )}
         </p>
-          <p className={`${viewSunrise ? "text-yellow-500" : "text-purple-500"} text-4xl font-extrabold`}>
-            {viewSunrise ? "Sunrise: " : "Sunset: "}
-            {displayTime(viewSunrise ? sunData.sunrise : sunData.sunset)}
+          <p className={`${viewSunrise? "text-yellow-500" : "text-purple-500"} text-4xl font-extrabold`}>
+            {viewSunrise ? "Sunrise: ":"Sunset: "}
+            {displayTime(viewSunrise ?sunData.sunrise :sunData.sunset)}
           </p>
           <p className="text-black italic text-lg mt-2">💬 {sunData.description}</p>
         </div>

@@ -5,7 +5,7 @@ dotenv.config();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export async function getTwinLocationDescription({ sunrise, sunset }) {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model= genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 const prompt = `
 You are a strict JSON-only assistant. Respond only with this format:
@@ -34,7 +34,7 @@ Find a city in a different part of the world with a similar sunrise (${sunrise})
     }
 
     const parsed = JSON.parse(responseText);
-    console.log("✅ Parsed Twin Response:", parsed);
+    console.log("Parsed Twin Response:", parsed);
     return parsed;
 
   } catch (err) {

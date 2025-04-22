@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 
+
 type History = {
   _id: string;
   clicked: {
@@ -27,6 +28,7 @@ type History = {
 export default function History() {
   const [history, setHistory] = useState<History[]>([]);
   const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchHistory = async () => {

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 export async function getLocationDescription({ lat, lng }) {
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const model=genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
   const prompt = `
   You are a strict JSON-only assistant. Respond only with this format:
@@ -30,9 +30,9 @@ export async function getLocationDescription({ lat, lng }) {
     }
   
     const parsed = JSON.parse(responseText);
-    return parsed; // Now includes both location and description
+    return parsed;
   } catch (err) {
-    console.error("❌ Failed to get location info:", err);
+    console.error("Failed to get location info:", err);
     throw new Error("Gemini location description failed.");
   }
 }

@@ -1,7 +1,7 @@
 import express from "express";
 import LocationHistory from "../models/History.js";
 
-const router = express.Router();
+const router= express.Router();
 router.delete("/wipe", async (req, res) => {
   try {
     await LocationHistory.deleteMany({});
@@ -14,7 +14,7 @@ router.delete("/wipe", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const allHistory = await LocationHistory.find().sort({ timestamp: -1 });
+    const allHistory= await LocationHistory.find().sort({ timestamp: -1 });
     res.json(allHistory);
   } catch (err) {
     console.error("Failed to fetch history:", err);
@@ -23,10 +23,10 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { clickedData, twinData } = req.body;
+  const {clickedData, twinData} = req.body;
 
-  try {
-    const newEntry = new LocationHistory({
+  try{
+    const newEntry= new LocationHistory({
       clicked: {
         latitude: clickedData.latitude,
         longitude: clickedData.longitude,

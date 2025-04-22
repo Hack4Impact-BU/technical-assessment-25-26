@@ -13,11 +13,11 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    const twinData = await getTwinLocationDescription({ sunrise, sunset });
+    const twinData= await getTwinLocationDescription({ sunrise, sunset });
     console.log("Twin data from gemini:", twinData);
     res.json(twinData);
   } catch (err) {
-    console.error("Gemini error:", err);
+    console.error("Gemini error:",err);
     res.status(500).json({ error: "Failed to get twin location." });
   }
 });
