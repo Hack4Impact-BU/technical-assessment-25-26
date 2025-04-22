@@ -4,8 +4,8 @@ import LocationMarker from "../LocationMarker/LocationMarker";
 const Map = () => {
   return (
     <MapContainer
-      center={[0, 0]}
-      zoom={2}
+      center={{ lat: 51.505, lng: -0.09 }}
+      zoom={13}
       style={{ height: "80vh", width: "80vw" }}
     >
       <TileLayer
