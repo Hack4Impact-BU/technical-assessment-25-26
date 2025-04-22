@@ -6,7 +6,7 @@ export default function History() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/history")
+    fetch("https://intense-fortress-30537-ba108689e738.herokuapp.com/api/history")
       .then((res) => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();

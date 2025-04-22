@@ -45,7 +45,7 @@ const generateResponse = async (req, res) => {
       sunsetTime: raw["Sunset Time"],
     };
 
-    await fetch("http://localhost:3000/api/history", {
+    await fetch("https://intense-fortress-30537-ba108689e738.herokuapp.com/api/history", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
