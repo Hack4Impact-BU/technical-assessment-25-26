@@ -5,7 +5,7 @@ const History = () => {
 
     return (
         <>
-            <h1>Ledger o' Voyages</h1>
+            <h1>Yer Voyages</h1>
             
         </>
     );

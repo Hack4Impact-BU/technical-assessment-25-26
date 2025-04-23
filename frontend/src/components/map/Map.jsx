@@ -6,7 +6,7 @@ import './Map.css';
 import L from 'leaflet';
 
 const customIcon = L.icon({
-    iconUrl: '../../../public/marker.png',
+    iconUrl: '../../assets/marker.png',
     iconSize: [40, 40],
     popupAnchor: [0,0]
 });
