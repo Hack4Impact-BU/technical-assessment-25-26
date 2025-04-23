@@ -39,8 +39,8 @@ function MapBox() {
     return (
         <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
             <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='<a href="https://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token=NrBr0ysd267nrNXn7KQ85PJrWXvQQaKhvBTj4G6h5NReZHvyZzo55pgXZUOEokRl"
             />
             <Marker position={position} icon={customIcon}>
             <Popup>
