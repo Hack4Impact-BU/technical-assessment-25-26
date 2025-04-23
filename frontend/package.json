@@ -13,6 +13,7 @@
     "leaflet": "^1.9.4",
     "react": "^19.0.0-rc.1",
     "react-dom": "^19.0.0-rc.1",
+    "sunrise-sunset-js": "^2.2.1",
     "vercel": "^37.12.1"
   },
   "devDependencies": {

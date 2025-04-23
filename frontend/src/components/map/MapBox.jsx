@@ -3,10 +3,11 @@ import { Icon } from 'leaflet'
 import { useState } from 'react';
 import './MapBox.css';
 import 'leaflet/dist/leaflet.css';
+import Sun from "../../components/sun/sun.jsx";
 
 
 
-export default function MapBox() {
+function MapBox() {
     const [position, setPosition] = useState([42.361145, -71.057083]);
     const [locationFound, setLocationFound] = useState(false);
     if (navigator.geolocation) {
@@ -28,7 +29,7 @@ export default function MapBox() {
       }
 
 
-      // ***CHANGE BEFORE UPLOAD***
+      
 
       const customIcon = new Icon({
         iconUrl: "https://img.icons8.com/?size=100&id=7880&format=png",
@@ -43,10 +44,14 @@ export default function MapBox() {
             />
             <Marker position={position} icon={customIcon}>
             <Popup>
-                {position} <br /> Easily customizable.
+                <Sun/>
             </Popup>
             </Marker>
         </MapContainer>
     )
 }
+
+export default MapBox;
+
+
 

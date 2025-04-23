@@ -7,7 +7,7 @@ function Welcome () {
                 Welcome!
             </h2>
             <p>
-                This is a website to find the sunrise and sunset times from anywhere in the world.*
+                This is a website to find the sunrise and sunset times from your location! (If location services are off it is set to Boston by default)
             </p>
 
         </div>
