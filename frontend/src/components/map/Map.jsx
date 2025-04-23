@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { getSunrise, getSunset } from 'sunrise-sunset-js';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
 import L from 'leaflet';
 
 const customIcon = L.icon({
-    iconUrl: '../../../public/close.png', // This image must have no background
+    iconUrl: '../../../public/marker.png',
     iconSize: [40, 40],
     popupAnchor: [0,0]
 });
@@ -13,8 +14,9 @@ const customIcon = L.icon({
 const Map = () => {
     const LocationMarker = () => {
         const [position, setPosition] = useState(null)
+        const [sunrise, setSunrise] = useState(null)
+        const [sunset, setSunset] = useState(null)
 
-        
         const map = useMapEvents({
             click() {
                 map.locate()
@@ -22,15 +24,23 @@ const Map = () => {
             locationfound(e) {
                 setPosition(e.latlng)
                 map.flyTo(e.latlng, map.getZoom())
+                setSunrise(getSunrise(e.latlng.lat, e.latlng.lng, new Date()))
+                setSunset(getSunset(e.latlng.lat, e.latlng.lng, new Date()))
             },
         })
 
         return position === null ? null : (
-        <Marker position={position} icon={customIcon}>
-            <Popup id="map_popup">
-                <h3>Hi Mom</h3>
-            </Popup>
-        </Marker>
+            <Marker position={position} icon={customIcon}>
+                <Popup id="map_popup">
+                    <>
+                        <h2>Ye Found Yer Booty!</h2>
+                        <p>
+                            <strong>Sunrise</strong> { sunrise ? sunrise.toLocaleString('us-NY') : '' }<br />
+                            <strong>Sunset</strong> { sunset ? sunset.toLocaleString('us-NY') : '' }
+                        </p>
+                    </>
+                </Popup>
+            </Marker>
         )
     }
 
@@ -45,7 +55,7 @@ const Map = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <LocationMarker />
-            </MapContainer>,
+            </MapContainer>
         </>
     );
 }
