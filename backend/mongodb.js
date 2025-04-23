@@ -1,13 +1,20 @@
 const { MongoClient } = require('mongodb');
+const dotenv = require('dotenv');
 
-const uri = process.env.MONGODB_URI;
+dotenv.config();
+
+const uri = process.env.MONGO_URI;
+
+if (!uri) {
+    throw new Error('Please add your Mongo URI to .env');
+}
 
 const client = new MongoClient(uri);
 
-const getDatabase = async () => {
+const getDatabase = async (db) => {
     try {
         await client.connect();
-        const database = client.db('h4i_technical_assessment_25');
+        const database = client.db(db);
         return database;
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
@@ -15,4 +22,4 @@ const getDatabase = async () => {
     }
 }
 
-export { getDatabase };
+module.exports = { getDatabase };

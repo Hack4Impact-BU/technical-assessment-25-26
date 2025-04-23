@@ -13,19 +13,20 @@ const customIcon = L.icon({
 
 const Map = () => {
     const LocationMarker = () => {
-        const [position, setPosition] = useState(null)
-        const [sunrise, setSunrise] = useState(null)
-        const [sunset, setSunset] = useState(null)
+        const [position, setPosition] = useState(null);
+        const [sunrise, setSunrise] = useState(null);
+        const [sunset, setSunset] = useState(null);
 
         const map = useMapEvents({
             click() {
-                map.locate()
+                map.locate();
             },
             locationfound(e) {
-                setPosition(e.latlng)
-                map.flyTo(e.latlng, map.getZoom())
-                setSunrise(getSunrise(e.latlng.lat, e.latlng.lng, new Date()))
-                setSunset(getSunset(e.latlng.lat, e.latlng.lng, new Date()))
+                console.log(e.latlng);
+                setPosition(e.latlng);
+                map.flyTo(e.latlng, map.getZoom());
+                setSunrise(getSunrise(e.latlng.lat, e.latlng.lng, new Date()));
+                setSunset(getSunset(e.latlng.lat, e.latlng.lng, new Date()));
             },
         })
 
