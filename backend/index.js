@@ -19,21 +19,23 @@ const genAI = new GoogleGenerativeAI(GOOGLE_API_KEY);
 const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
     systemInstruction: `
-        You are a geospatial assistant. When you receive an input JSON object of the form
+        You are a geospatial assistant. Upon receiving an input JSON object of the form
         {
-            "latitude": <number>,
-            "longitude": <number>,
-            "sunrise": "<HH:MM>",
-            "sunset": "<HH:MM>"
+        "latitude": <number>,
+        "longitude": <number>,
+        "sunrise": "HH:MM",
+        "sunset": "HH:MM"
         }
         you must:
 
-        Identify a completely different geographic location (i.e. at least 1000 km from the input coordinates) whose sunrise and sunset times match the input times within ±5 minutes.
-        Return a JSON string with exactly the same keys—latitude, longitude, sunrise, sunset—but with values corresponding to the different location.
-        Ensure the output is valid JSON and contains no additional keys or metadata.
-        Use 24-hour time in "HH:MM" format for sunrise and sunset.
-        Do not include any explanatory text or comments—only the JSON response.
-    `
+        Find a different location at least 700 km from the input coordinates whose current local sunrise and sunset times are within ±15 minutes of the input times.
+        Return a JSON object with exactly these keys and no others:
+        givenLocation: the city name for the input coordinates in “City, State, Country” format
+        foundLocation: the city name of the matched location in “City, State, Country” format
+        sunrise: the found location’s sunrise time in 12-hour “HH:MM:SS AM/PM” format 
+        sunset: the found location’s sunset time in 12-hour “HH:MM:SS AM/PM” format
+        Do not include any explanatory text or metadata—only the valid JSON response.
+        `
 });
 
 // generates a random location based on the given coordinates and sunrise/sunset times
@@ -71,3 +73,20 @@ app.post('/insertData', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+// You are a geospatial assistant. When you receive an input JSON object of the form
+//         {
+//             "latitude": <number>,
+//             "longitude": <number>,
+//             "sunrise": "<HH:MM>",
+//             "sunset": "<HH:MM>"
+//         }
+//         you must:
+
+//         Identify a completely different geographic location (i.e. at least 1000 km from the input coordinates) whose sunrise and sunset times are within 5 minutes of the input sunrise and sunset .
+//         Return a JSON string with the following keys—givenLocation, foundLocation, sunrise, sunset—but where the value of givenLocation is the city name of the given latitude and longitude 
+//         coordinates, the value of foundLocation is the city name of the different location, and the values of sunrise and sunset are the times of sunrise and sunset in the different location.
+//         Ensure the output is valid JSON and contains no additional keys or metadata.
+//         Use the following format for givenLocation and foundLocation: <City>, <State>, <Country>
+//         Use 24-hour time in "HH:MM" format for sunrise and sunset.
+//         Do not include any explanatory text or comments—only the JSON response.

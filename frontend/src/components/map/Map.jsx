@@ -16,7 +16,7 @@ const Map = () => {
         const [position, setPosition] = useState(null);
         const [sunrise, setSunrise] = useState(null);
         const [sunset, setSunset] = useState(null);
-        const [geminiResponse, setGeminiResponse] = useState('');
+        const [geminiResponse, setGeminiResponse] = useState({});
 
         const map = useMapEvents({
             click() {
@@ -43,6 +43,7 @@ const Map = () => {
                             longitude: ${long}, 
                             sunrise: ${rise},
                             sunset: ${set},`
+            console.log(request);
             try {
                 const response = await fetch('http://localhost:5000/generate', {
                     method: 'POST',
@@ -57,10 +58,20 @@ const Map = () => {
                 }
 
                 const data = await response.json();
-                console.log("Generated response:", data.responseMessage);
-                setGeminiResponse(JSON.stringify(data.responseMessage));
+                const dataObj = JSON.parse(data.responseMessage.replace(/```(?:json)?/g, ""));
+                setGeminiResponse(dataObj);
 
-                return data.responseMessage;
+                const returnedData = {
+                    givenLocation: dataObj.givenLocation,
+                    foundLocation: dataObj.foundLocation,
+                    givenSunrise: sunrise.toLocaleTimeString(),
+                    givenSunset: sunset.toLocaleTimeString(),
+                    foundSunrise: dataObj.sunrise,
+                    foundSunset: dataObj.sunset
+                };
+
+                console.log(returnedData);
+                return returnedData;
 
             } catch (error) {
                 console.error("Error generating response", error);
@@ -74,7 +85,7 @@ const Map = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ insert })
+                    body: JSON.stringify(insert)
                 });
 
                 if (!response.ok) {
