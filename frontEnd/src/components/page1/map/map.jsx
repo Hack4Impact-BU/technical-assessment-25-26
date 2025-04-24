@@ -5,14 +5,16 @@ import './map.css'
 
 function Map() {
     const [position, setPosition] = React.useState([42.349998, -71.10315352])
+    const [sunRises, setSunRises] = React.useState('')
+    const [sunSets, setSunSets] = React.useState('')
 
     async function postPosition() {
-        await fetch('http://localhost:4000/positions', {
+        await fetch('http://localhost:4000/ai', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ lat: position.lat, lng: position.lng }),
+            body: JSON.stringify({ lat: position.lat, lng: position.lng, sunRise: sunRises, sunSet: sunSets }),
         })
     }
 
@@ -20,6 +22,8 @@ function Map() {
         useMapEvents({
             click(e) {
                 setPosition(e.latlng)
+                setSunRises(getSunrise(e.latlng.lat, e.latlng.lng).toLocaleTimeString())
+                setSunSets(getSunset(e.latlng.lat, e.latlng.lng).toLocaleTimeString())
                 postPosition()
             },
         })
@@ -32,13 +36,13 @@ function Map() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker position={position}>
+                <SetLocation />
                 <Popup>
                     Clicked here: {position.lat}, {position.lng} <br />
                     Sunrise: {getSunrise(position.lat, position.lng).toLocaleTimeString()} <br />
                     Sunset: {getSunset(position.lat, position.lng).toLocaleTimeString()}
                 </Popup>
             </Marker>
-            <SetLocation />
         </MapContainer>
     )
 }

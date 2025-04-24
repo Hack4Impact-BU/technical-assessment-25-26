@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom'
 
 
 function History() {
-    const [data, setData] = useState([])       // ↙ holds the fetched array
+    const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError]   = useState(null)
   
-    // fetch once after mount
     useEffect(() => {
       (async () => {
         try {
