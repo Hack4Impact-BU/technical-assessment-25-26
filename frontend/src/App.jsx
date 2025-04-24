@@ -8,7 +8,7 @@ function App() {
     <div className="page_container">
       <div className="title_container">
         Seadog's Compass
-        <img src="../../../public/compass.png" alt="compass" className="compass_img" />
+        <img src="../compass.png" alt="compass" className="compass_img" />
       </div>
       <div className="body_container">
         <TabArea />
