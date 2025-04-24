@@ -29,7 +29,7 @@ const Map = () => {
                 const sunset = getSunset(e.latlng.lat, e.latlng.lng, new Date());
                 setSunrise(sunrise);
                 setSunset(sunset);
-                generateResponse(e.latlng, sunrise, sunset);
+                generateResponse(e.latlng, sunrise, sunset).then((data) => insertData(data));
             },
         });
 
@@ -59,10 +59,32 @@ const Map = () => {
                 console.log("Generated response:", data.responseMessage);
                 setGeminiResponse(JSON.stringify(data.responseMessage));
 
+                return data.responseMessage;
+
             } catch (error) {
                 console.error("Error generating response", error);
             }
         };
+
+        const insertData = async (insert) => {
+            try {
+                const response = await fetch('http://localhost:5000/insertData', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ insert })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to insert data in database");
+                }
+
+                const data = await response.json();
+            } catch (error) {
+                console.error("Error inserting data into database", error);
+            }
+        }
 
 
         return position === null ? null : (
