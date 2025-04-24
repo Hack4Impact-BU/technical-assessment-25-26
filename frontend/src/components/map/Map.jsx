@@ -16,6 +16,7 @@ const Map = () => {
         const [position, setPosition] = useState(null);
         const [sunrise, setSunrise] = useState(null);
         const [sunset, setSunset] = useState(null);
+        const [geminiResponse, setGeminiResponse] = useState('');
 
         const map = useMapEvents({
             click() {
@@ -41,7 +42,6 @@ const Map = () => {
                             longitude: ${long}, 
                             sunrise: ${rise},
                             sunset: ${set},`
-            console.log(request);
             try {
                 const response = await fetch('http://localhost:5000/generate', {
                     method: 'POST',
@@ -57,6 +57,7 @@ const Map = () => {
 
                 const data = await response.json();
                 console.log("Generated response:", data.responseMessage);
+                setGeminiResponse(JSON.stringify(data.responseMessage));
 
             } catch (error) {
                 console.error("Error generating response", error);
@@ -68,11 +69,20 @@ const Map = () => {
             <Marker position={position} icon={customIcon}>
                 <Popup id="map_popup">
                     <>
-                        <h2>Ye Found Yer Booty!</h2>
-                        <p>
-                            <strong>Sunrise</strong> { sunrise ? sunrise.toLocaleString('us-NY') : '' }<br />
-                            <strong>Sunset</strong> { sunset ? sunset.toLocaleString('us-NY') : '' }
-                        </p>
+                        {geminiResponse ?
+                        <>
+                            <p>{geminiResponse}</p>
+                        </>
+                        : 
+                        <>
+                            <h2>Ye Found Yer Booty!</h2>
+                            <p>
+                                <strong>Sunrise</strong> { sunrise ? sunrise.toLocaleString('us-NY') : '' }<br />
+                                <strong>Sunset</strong> { sunset ? sunset.toLocaleString('us-NY') : '' }
+                            </p>
+                        </>
+                        }
+                        
                     </>
                 </Popup>
             </Marker>
