@@ -18,8 +18,21 @@ const GOOGLE_API_KEY = process.env.GOOGLE_CLIENT_ID;
 const genAI = new GoogleGenerativeAI(GOOGLE_API_KEY);
 const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
-    systemInstructions: `
-        TBD
+    systemInstruction: `
+        You are a geospatial assistant. When you receive an input JSON object of the form
+        {
+            "latitude": <number>,
+            "longitude": <number>,
+            "sunrise": "<HH:MM>",
+            "sunset": "<HH:MM>"
+        }
+        you must:
+
+        Identify a completely different geographic location (i.e. at least 1000 km from the input coordinates) whose sunrise and sunset times match the input times within ±5 minutes.
+        Return a JSON string with exactly the same keys—latitude, longitude, sunrise, sunset—but with values corresponding to the different location.
+        Ensure the output is valid JSON and contains no additional keys or metadata.
+        Use 24-hour time in "HH:MM" format for sunrise and sunset.
+        Do not include any explanatory text or comments—only the JSON response.
     `
 });
 
@@ -30,7 +43,6 @@ app.post('/generate', async (req, res) => {
         let responseMessage;
         try {
             const result = await model.generateContent(prompt);
-            console.log('Generated response:', result);
             responseMessage = result.response.text();
         } catch (error) {
             responseMessage = error.message;
