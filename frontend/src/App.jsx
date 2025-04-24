@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="page_container">
       <div className="title_container">
-        Seadog's Compass
+        Skipper's Voyage
         <img src="../compass.png" alt="compass" className="compass_img" />
       </div>
       <div className="body_container">
