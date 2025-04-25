@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import './map.css'
+import LocationMarker from './components/events/events.jsx'
 
 function Map() {
     return (
@@ -16,6 +17,7 @@ function Map() {
                         A pretty CSS3 popup. <br /> Easily customizable.
                     </Popup>
                 </Marker>
+                <LocationMarker />
             </MapContainer>
         </div>
     )
