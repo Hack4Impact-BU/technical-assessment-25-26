@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npx vite build",
     "preview": "vite preview"
   },
   "keywords": [],
@@ -18,7 +18,8 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "mongoose": "^8.13.2",
-    "sunrise-sunset-js": "^2.2.1"
+    "sunrise-sunset-js": "^2.2.1",
+    "vite": "^6.3.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
