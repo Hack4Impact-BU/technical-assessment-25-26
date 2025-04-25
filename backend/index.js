@@ -7,7 +7,13 @@ import sunriseRoutes from './routes/sunrise.js'; // 👈 add this line
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+}));
+
 app.use(express.json());
 
 app.use((req, res, next) => {
