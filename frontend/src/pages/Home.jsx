@@ -17,10 +17,12 @@ export default function Home() {
   const [error, setError] = useState(null);
 
   const handleMapClick = async (latlng) => {
+    console.log('Frontend clicked at:', latlng); // add this
+  
     setMarker(latlng);
     setTimes(null);
     setError(null);
-
+  
     try {
       const data = await getSunriseSunset(latlng.lat, latlng.lng);
       setTimes(data);
