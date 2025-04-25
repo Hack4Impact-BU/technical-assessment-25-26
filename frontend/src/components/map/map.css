@@ -14,8 +14,8 @@
 }
 
 .leaflet-container {
-    width: 100%;
-    height: 80vh; /* Adjust height of the actual map */
+    width: 80%;
+    height: 60vh; /* Adjust height of the actual map */
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
