@@ -1,12 +1,13 @@
 # [YOUR FULL NAME]'s Submission
+Ryden Tamura
 **Date**: [date here]
-
+4/25/25
 **BU Email**: [email here]
-
+rtt2801@bu.edu
 **Class Year**: [year here]
-
+2028
 **Favorite Hobby**: [hobby here]
-
+Diving
 ## Requirements
 Please check off which features you have implemented:
 - [ ] A catchy name and title with a cool font!
@@ -16,14 +17,19 @@ Please check off which features you have implemented:
 - [ ] A separate history page that keeps track of locations you've tapped. This should include latitude, longitude, and some information about Google Gemini's response. You can include the whole response if you want, but making another call to Google Gemini to extract just the location to put on there would be extra cool! You can display this information in whatever format you want. Make sure you can get between your home and history pages by clicking on an icon, text, etc.
 - [ ] Deploy the frontend and backend if you can using some of the free deployment tools we talked about in the workshops!
 
-## Screen Recording 
+
+## Screen Recording
 **Link**: [paste it here]
+
 
 ## Written Portion
 1. **How did the project go? What parts of it did you most enjoy / find yourself good at?**
 
+
 [answer here]
 
+
 2. **Was this technical assessment what you expected? If you had another two weeks to work on it, what would you add or change?**
+
 
 [answer here]
