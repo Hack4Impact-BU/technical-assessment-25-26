@@ -11,9 +11,9 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB (can be commented for now if unused)
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('MongoDB error:', err));
+//mongoose.connect(process.env.MONGO_URI)
+//  .then(() => console.log('Connected to MongoDB'))
+//  .catch((err) => console.error('MongoDB error:', err));
 
 // API routes
 app.use('/api/sunrise', sunriseRoutes); // add this line
