@@ -25,7 +25,7 @@ export default function History () {
     useEffect(() => {
 
         //fetch each log from database via backend
-        fetch('http://localhost:4000/logs')
+        fetch('https://morning-fjord-49398-bd72dac11171.herokuapp.com/logs')
             .then(res => res.json())
             .then(data => {
                 let newMessages = []
@@ -43,7 +43,7 @@ export default function History () {
     function deleteHistory(){
         let newMessages = []
 
-        fetch('http://localhost:4000/delete', {
+        fetch('https://morning-fjord-49398-bd72dac11171.herokuapp.com/delete', {
             method: 'POST',
 
         })

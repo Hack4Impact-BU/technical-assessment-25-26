@@ -39,7 +39,7 @@ export default function Leaflet() {
 
 
                 // post request to get sunrise times
-                fetch('http://localhost:4000/sunrise-sunset', {
+                fetch('https://morning-fjord-49398-bd72dac11171.herokuapp.com/sunrise-sunset', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ export default function Leaflet() {
 
 
 
-                        fetch('http://localhost:4000/chat', {
+                        fetch('https://morning-fjord-49398-bd72dac11171.herokuapp.com/chat', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ export default function Leaflet() {
 
 
                                 // add log to backend db
-                                fetch('http://localhost:4000/add', {
+                                fetch('https://morning-fjord-49398-bd72dac11171.herokuapp.com/add', {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json'
