@@ -1,11 +1,11 @@
 # [YOUR FULL NAME]'s Submission
-**Date**: [date here]
+**Date**: [4/25/2025]
 
-**BU Email**: [email here]
+**BU Email**: [trevork@bu.edu]
 
-**Class Year**: [year here]
+**Class Year**: [2027]
 
-**Favorite Hobby**: [hobby here]
+**Favorite Hobby**: [Basketball]
 
 ## Requirements
 Please check off which features you have implemented:
