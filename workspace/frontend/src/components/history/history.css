@@ -1,0 +1,46 @@
+
+.history{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.logbox {
+    position: relative;
+    width: 65%;
+    color: mintcream;
+    background-color: #8ecae6 ;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+.x {
+
+    font-size: 1.5rem;
+    padding: 2px 5px;
+    border-radius: 5%;
+    border-width: 0.2rem;
+    width: 25%;
+    height: 100%
+}
+button {
+    padding: 0.4rem 0.8rem;
+    border: 0.2rem solid #F77F00;
+    border-radius: 0.2rem;
+    background-image: linear-gradient(to top,  #D62828, #F77F00,#FCBF49);
+    color: mintcream;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background-color: #e5d9f2;
+    color: #8ecae6;
+}
