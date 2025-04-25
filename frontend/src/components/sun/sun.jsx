@@ -1,10 +1,9 @@
 import { getSunrise, getSunset } from 'sunrise-sunset-js';
 import { useState } from 'react';
 
-export default function Sun() {
-    const [position, setPosition] = useState([42.361145, -71.057083]);
+export default function Sun({position, setPosition}) {
     const [locationFound, setLocationFound] = useState(false);
-    if (navigator.geolocation) {
+    if (navigator.geolocation && !{locationFound}) {
         navigator.geolocation.getCurrentPosition(
             (pos) => {
             setPosition([pos.coords.latitude, pos.coords.longitude]);
@@ -21,11 +20,13 @@ export default function Sun() {
             }
         );
         }
-    const sunset =  getSunset(position[0], position[1]).toString();
-    const sunrise = getSunrise(position[0], position[1]).toString();
+    const sunset =  getSunset(position[0], position[1]).toLocaleTimeString();
+    const sunrise = getSunrise(position[0], position[1]).toLocaleTimeString();
     return (
         <div>
-           <a>Sunrise time: {sunrise} <br /> Sunset time: {sunset}</a> 
+            <h2>Your Location:</h2>
+           <p>Sunrise: {sunrise}</p>
+           <p>Sunset: {sunset}</p>
         </div> 
     );
 }
