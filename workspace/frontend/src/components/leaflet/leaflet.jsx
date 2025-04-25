@@ -2,13 +2,25 @@ import { MapContainer, TileLayer, Marker, Popup,useMapEvents,  } from 'react-lea
 import {useState, } from "react";
 import './leaflet.css'
 import 'leaflet/dist/leaflet.css'
-//import Chat from '../chat/chat.jsx'
+
+
+
+
+{/*
+This is the main component of the leaflet Map
+
+On click of a position on the map, the sunset/sunrise times is fetched,
+then the gemini response, then all this information is added to the backend db
+
+Finally, this information is displayed in a popup on the map
+
+*/}
+
 
 export default function Leaflet() {
-    const [position, setPosition] = useState(null)
-    const [sunInfo, setSunInfo] = useState(["", ""])
-    //const [geminiInput, setGeminiInput] = useState("");
-    const [geminiOutput, setGeminiOutput] = useState("");
+    const [position, setPosition] = useState(null)                  //latlang coords of marker
+    const [sunInfo, setSunInfo] = useState(["", ""])        //sunrise/sunset times
+    const [geminiOutput, setGeminiOutput] = useState("");     // other location given by gemini
 
 
 
@@ -16,18 +28,17 @@ export default function Leaflet() {
     function  LocationMarker() {
 
 
-
+    // click event
         const map = useMapEvents({
             click  (e) {
-
+                // initialze constants with coords
                 const lat = e.latlng.lat
                 const lng = e.latlng.lng
                 setPosition(e.latlng)
-                //setGeminiInput(e.latlng)
                 map.flyTo(e.latlng, map.getZoom())
 
 
-
+                // post request to get sunrise times
                 fetch('http://localhost:4000/sunrise-sunset', {
                     method: 'POST',
                     headers: {
@@ -42,10 +53,13 @@ export default function Leaflet() {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        setSunInfo(data.message)
+                        setSunInfo(data.message)        //update sun info
                         console.log("setting sunInfo useState to ",data.message)
                         const GeminiInput = `lat: ${lat},lng: ${lng} Sunrise & Sunset times ${data.message}`
-                        const suntimes = data.message
+                        const suntimes = data.message   // variable to be used for gemini
+
+
+
                         fetch('http://localhost:4000/chat', {
                             method: 'POST',
                             headers: {
@@ -59,7 +73,7 @@ export default function Leaflet() {
                                 console.log("setting sunInfo useState to ",data.message)
 
 
-
+                                // add log to backend db
                                 fetch('http://localhost:4000/add', {
                                     method: 'POST',
                                     headers: {
@@ -115,7 +129,7 @@ export default function Leaflet() {
         })
 
 
-
+        // marker information
         return position === null ? null : (
 
             <Marker position={position}>
