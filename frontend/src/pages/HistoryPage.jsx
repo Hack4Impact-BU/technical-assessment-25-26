@@ -13,13 +13,15 @@ import {
     Typography,
 } from '@mui/material';
 
+const API_URL = import.meta.env.VITE_API_URL
+
 export default function HistoryPage() {
     const [rows, setRows] = useState([]);
     const [selected, setSelected] = useState([]);
 
     useEffect(() => {
         const sessionId = localStorage.getItem('sessionId');
-        fetch(`http://localhost:4000/history?sessionId=${sessionId}`)
+        fetch(`${API_URL}/history?sessionId=${sessionId}`)
             .then((res) => res.json())
             .then((data) =>
                 setRows(
@@ -52,7 +54,7 @@ export default function HistoryPage() {
 
     const handleDelete = () => {
         const sessionId = localStorage.getItem('sessionId');
-        fetch('http://localhost:4000/history', {
+        fetch(`${API_URL}/history`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ sessionId, ids: selected }),

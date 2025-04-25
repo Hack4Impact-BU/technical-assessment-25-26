@@ -2,6 +2,8 @@ import { Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { useRef, useEffect } from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function CurrentLocationMarker({ lat, lon, sessionId }) {
     const map = useMap();
     const inFlight = useRef(false);
@@ -16,7 +18,7 @@ export default function CurrentLocationMarker({ lat, lon, sessionId }) {
             .openOn(map);
 
         try {
-            const sunRes = await fetch('http://localhost:4000/sun', {
+            const sunRes = await fetch(`${API_URL}/sun`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ lat, lon }),
@@ -41,7 +43,7 @@ export default function CurrentLocationMarker({ lat, lon, sessionId }) {
         </div>
       `);
 
-            const gemRes = await fetch('http://localhost:4000/gemini', {
+            const gemRes = await fetch(`${API_URL}/gemini`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ lat, lon }),

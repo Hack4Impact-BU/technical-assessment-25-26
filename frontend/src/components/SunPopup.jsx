@@ -2,6 +2,8 @@ import { useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import { useRef } from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function SunPopup({ sessionId }) {
     const popupRef = useRef(null);
     const map = useMapEvents({
@@ -22,7 +24,7 @@ export default function SunPopup({ sessionId }) {
             popupRef.current = popup;
 
             try {
-                const sunRes = await fetch('http://localhost:4000/sun', {
+                const sunRes = await fetch(`${API_URL}/sun`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ lat, lon: lng }),
@@ -56,7 +58,7 @@ export default function SunPopup({ sessionId }) {
           </div>
         `);
 
-                fetch('http://localhost:4000/gemini', {
+                fetch(`${API_URL}/gemini`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ lat, lon: lng }),
@@ -90,7 +92,7 @@ export default function SunPopup({ sessionId }) {
                 🌇 ${sunsetLocal}
               </div>
             `);
-                        await fetch('http://localhost:4000/history', {
+                        await fetch(`${API_URL}/history`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ sessionId, lat, lon: lng, tz }),
