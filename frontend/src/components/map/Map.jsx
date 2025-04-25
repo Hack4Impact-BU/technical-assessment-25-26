@@ -43,7 +43,6 @@ const Map = () => {
                             longitude: ${long}, 
                             sunrise: ${rise},
                             sunset: ${set},`
-            console.log(request);
             try {
                 const response = await fetch('http://localhost:5000/generate', {
                     method: 'POST',
@@ -62,6 +61,8 @@ const Map = () => {
                 setGeminiResponse(dataObj);
 
                 const returnedData = {
+                    latitude: dataObj.latitude,
+                    longitude: dataObj.longitude,
                     givenLocation: dataObj.givenLocation,
                     foundLocation: dataObj.foundLocation,
                     givenSunrise: sunrise.toLocaleTimeString(),

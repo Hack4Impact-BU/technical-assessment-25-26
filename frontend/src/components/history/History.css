@@ -1,0 +1,22 @@
+.voyage_table {
+    width: 90vw;
+    height: 50vh;
+    border: 2px solid #3d1c07;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+[aria-label="voyage_table_column"] {
+    border: 2px solid #3d1c07;
+    margin: none;
+    font-size: 30px;
+}
+
+.voyage_info_container{
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px solid #3d1c07;
+    width: 90vw;
+    height: 50px;
+}

@@ -1,24 +1,32 @@
 import { useState } from 'react';
-import { Tab, Tabs } from '@heroui/tabs'; 
+import { Button } from '@mui/material';
+import PropTypes from 'prop-types';
 import Map from '../map/Map';
 import History from '../history/History';
 import './Tabs.css';
 
-const TabArea = () => {
-    const sizes = ["sm", "md", "lg"];
+const Tabs = () => {
+    const [page, setPage] = useState(0);
+
+    const handleChange = (event) => {
+        setPage(event)
+    };
 
     return (
-        <div className="body_container">
-            <Tabs key="lg" variant="solid">
-                <Tab id="tab_1" title="Ye Course">
-                    <Map />
-                </Tab>
-                <Tab id="tab_2" title="Ledger o' Voyages">
-                    <History />
-                </Tab>
-            </Tabs>
-        </div>
+        <>
+            <div className="button_container">
+                <Button variant="outlined" onClick={() => handleChange(0)}>
+                    Ye Map
+                </Button>
+                <Button variant="outlined" onClick={() => handleChange(1)}>
+                    LOG O' VOYAGES
+                </Button>
+            </div>
+            <div className="body_container">
+                {page == 0 ? <Map/> : <History/>}
+            </div>
+        </>
     )
 }
 
-export default TabArea;
+export default Tabs;

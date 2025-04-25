@@ -31,6 +31,8 @@ const model = genAI.getGenerativeModel({
         Find a different location at least 700 km from the input coordinates whose current local sunrise and sunset times are within ±15 minutes of the input times.
         Return a JSON object with exactly these keys and no others:
         givenLocation: the city name for the input coordinates in “City, State, Country” format
+        latitude: the exact latitude that was given to you
+        longitude: the exact longitude that was given to you
         foundLocation: the city name of the matched location in “City, State, Country” format
         sunrise: the found location’s sunrise time in 12-hour “HH:MM:SS AM/PM” format 
         sunset: the found location’s sunset time in 12-hour “HH:MM:SS AM/PM” format
@@ -70,23 +72,19 @@ app.post('/insertData', async (req, res) => {
     }
 });
 
+app.get('/fetchVoyages', async (req, res) => {
+    try {
+        const db = await getDatabase('h4i_technical_assessment_25');
+        const collection = db.collection('locations');
+        const voyages = await collection.find().toArray();
+        console.log(voyages);
+        res.status(200).json(voyages);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+    
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-// You are a geospatial assistant. When you receive an input JSON object of the form
-//         {
-//             "latitude": <number>,
-//             "longitude": <number>,
-//             "sunrise": "<HH:MM>",
-//             "sunset": "<HH:MM>"
-//         }
-//         you must:
-
-//         Identify a completely different geographic location (i.e. at least 1000 km from the input coordinates) whose sunrise and sunset times are within 5 minutes of the input sunrise and sunset .
-//         Return a JSON string with the following keys—givenLocation, foundLocation, sunrise, sunset—but where the value of givenLocation is the city name of the given latitude and longitude 
-//         coordinates, the value of foundLocation is the city name of the different location, and the values of sunrise and sunset are the times of sunrise and sunset in the different location.
-//         Ensure the output is valid JSON and contains no additional keys or metadata.
-//         Use the following format for givenLocation and foundLocation: <City>, <State>, <Country>
-//         Use 24-hour time in "HH:MM" format for sunrise and sunset.
-//         Do not include any explanatory text or comments—only the JSON response.

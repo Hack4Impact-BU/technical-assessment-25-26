@@ -1,19 +1,17 @@
-import { React } from 'react';
-import TabArea from './components/tabs/Tabs';
-import Map from './components/map/Map';
+import Tabs from './components/tabs/Tabs';
 import './App.css';
 
 function App() {
   return (
-    <div className="page_container">
-      <div className="title_container">
-        Skipper's Voyage
-        <img src="../compass.png" alt="compass" className="compass_img" />
+      <div className="page_container">
+        <div className="title_container">
+          Skipper's Voyage
+          <img src="../compass.png" alt="compass" className="compass_img" />
+        </div>
+        <div className="body_container">
+          <Tabs />
+        </div>
       </div>
-      <div className="body_container">
-        <TabArea />
-      </div>
-    </div>
   )
 }
 
