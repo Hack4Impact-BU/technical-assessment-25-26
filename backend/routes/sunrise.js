@@ -4,6 +4,8 @@ import { getSunrise, getSunset } from 'sunrise-sunset-js';
 const router = express.Router();
 
 router.post('/', (req, res) => {
+  console.log('Received POST /api/sunrise with body:', req.body); // Check if this logs
+
   const { lat, lng } = req.body;
 
   if (lat == null || lng == null) {
