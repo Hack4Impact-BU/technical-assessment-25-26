@@ -21,15 +21,16 @@ Please check off which features you have implemented:
 ## Screen Recording
 **Link**: [paste it here]
 
+https://drive.google.com/file/d/1169gNlJuGCaqEh6uJTUhGUXA0QLwP0VF/view?usp=sharing
 
 ## Written Portion
 1. **How did the project go? What parts of it did you most enjoy / find yourself good at?**
-
-
 [answer here]
+This project was a good for developing and practicing SWE coding of an app while still being engaging for me throughout. It was a fairly simple prompt that you could dice further into and i enjoyed it. I enjoyed mesing around with the google geminni prompt the most and am happy with my end product. I struggled intially with the concepts and code for intial website/app setup but got the hang more as i got further along.
 
 
 2. **Was this technical assessment what you expected? If you had another two weeks to work on it, what would you add or change?**
 
+This technical assessment was a good difficulty and i felt was a good test. If i had more time i would make use my ai to use the coordinates and give a name of a main location in the form near(location). I would also try to do the thing where even though they are seperate, have the history gemini say the same lcoation but breifer when compared to the one in the popup.
 
 [answer here]
