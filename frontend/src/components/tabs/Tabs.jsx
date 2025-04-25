@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Button } from '@mui/material';
-import PropTypes from 'prop-types';
 import Map from '../map/Map';
 import History from '../history/History';
 import './Tabs.css';
@@ -16,7 +15,7 @@ const Tabs = () => {
         <>
             <div className="button_container">
                 <Button variant="contained" id="map_button" onClick={() => handleChange(0)}>
-                    Ye Map<img id="skull_img" src="../../../public/skull.png"/>
+                    YE MAP<img id="skull_img" src="../../../public/skull.png"/>
                 </Button>
                 <Button variant="contained" id="voyage_button" sx={{fontFamily: "Pirata One", fontSize: "20px"}} onClick={() => handleChange(1)}>
                     LOG O' VOYAGES

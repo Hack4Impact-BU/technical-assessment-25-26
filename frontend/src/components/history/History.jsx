@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@heroui/react";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import './History.css';
 
@@ -35,8 +34,6 @@ const History = () => {
                         <TableHead>
                         <TableRow sx={{borderBottom: "solid"}}>
                             <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE LOCATION</TableCell>
-                            {/* <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>LONG</TableCell>
-                            <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>LAT</TableCell> */}
                             <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE SUNRISE</TableCell>
                             <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE SUNSET</TableCell>
                             <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE VOYAGE</TableCell>
@@ -48,8 +45,6 @@ const History = () => {
                         {voyages.map((voyage, index) => (
                             <TableRow key={index} className="voyage_info_container">
                                     <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.givenLocation} ({voyage.data.latitude}, {voyage.data.longitude})</TableCell>
-                                    {/* <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.longitude}</TableCell> */}
-                                    {/* <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.latitude}</TableCell> */}
                                     <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.givenSunrise}</TableCell>
                                     <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.givenSunset}</TableCell>
                                     <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.foundLocation} ({voyage.data.foundLat}, {voyage.data.foundLong})</TableCell>
