@@ -1,4 +1,5 @@
 import Tabs from './components/tabs/Tabs';
+import Footer from './components/footer/Footer';
 import './App.css';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         </div>
         <div className="body_container">
           <Tabs />
+          <Footer />
         </div>
       </div>
   )
