@@ -29,8 +29,8 @@ const Map = () => {
                 const sunset = getSunset(e.latlng.lat, e.latlng.lng, new Date());
                 setSunrise(sunrise);
                 setSunset(sunset);
-                // generateResponse(e.latlng, sunrise, sunset).then((data) => insertData(data));
-                generateResponse(e.latlng, sunrise, sunset)
+                generateResponse(e.latlng, sunrise, sunset).then((data) => insertData(data));
+                // generateResponse(e.latlng, sunrise, sunset)
             },
         });
 
@@ -73,8 +73,7 @@ const Map = () => {
                 };
 
                 setGeminiResponse(returnedData);
-
-                // console.log(returnedData);
+                
                 return returnedData;
 
             } catch (error) {

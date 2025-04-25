@@ -33,7 +33,7 @@ const History = () => {
                 <TableContainer>
                     <Table aria-label="voyage table" className="voyage_table">
                         <TableHead>
-                        <TableRow>
+                        <TableRow sx={{borderBottom: "solid"}}>
                             <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE LOCATION</TableCell>
                             {/* <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>LONG</TableCell>
                             <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>LAT</TableCell> */}
