@@ -58,7 +58,6 @@ const Map = () => {
 
                 const data = await response.json();
                 const dataObj = JSON.parse(data.responseMessage.replace(/```(?:json)?/g, ""));
-                setGeminiResponse(dataObj);
 
                 const returnedData = {
                     latitude: dataObj.latitude,
@@ -68,10 +67,14 @@ const Map = () => {
                     givenSunrise: sunrise.toLocaleTimeString(),
                     givenSunset: sunset.toLocaleTimeString(),
                     foundSunrise: dataObj.sunrise,
-                    foundSunset: dataObj.sunset
+                    foundSunset: dataObj.sunset,
+                    foundLong: dataObj.foundLocationLong,
+                    foundLat: dataObj.foundLocationLat
                 };
 
-                console.log(returnedData);
+                setGeminiResponse(returnedData);
+
+                // console.log(returnedData);
                 return returnedData;
 
             } catch (error) {
@@ -103,22 +106,26 @@ const Map = () => {
         return position === null ? null : (
             <Marker position={position} icon={customIcon}>
                 <Popup id="map_popup">
-                    <>
-                        {geminiResponse ?
-                        <>
-                            <p>{geminiResponse}</p>
-                        </>
-                        : 
-                        <>
-                            <h2>Ye Found Yer Booty!</h2>
-                            <p>
-                                <strong>Sunrise</strong> { sunrise ? sunrise.toLocaleString('us-NY') : '' }<br />
-                                <strong>Sunset</strong> { sunset ? sunset.toLocaleString('us-NY') : '' }
-                            </p>
-                        </>
-                        }
+                    <div className="map_popup_container">
+                        {geminiResponse ?(
+                            <>
+                                <p>
+                                    {geminiResponse.givenLocation}<br/>
+                                    Rise: {geminiResponse.givenSunrise} | Set: {geminiResponse.givenSunset}<br/><br/>
+                                    Similar Location: <br/>{geminiResponse.foundLocation}
+                                </p>
+                            </>
+                        ) : (
+                            <>
+                                <h2>Ye Found Yer Booty!</h2>
+                                <p>
+                                    <strong>Sunrise</strong> { sunrise ? sunrise.toLocaleString('us-NY') : '' }<br />
+                                    <strong>Sunset</strong> { sunset ? sunset.toLocaleString('us-NY') : '' }
+                                </p>
+                            </>
+                        )}
                         
-                    </>
+                    </div>
                 </Popup>
             </Marker>
         )

@@ -28,33 +28,33 @@ const History = () => {
 
     return (
         <>
-            <h1>Yer Voyages</h1>
+            <h1>Find Ye Booty</h1>
             <div className="voyage_table_container">
                 <TableContainer>
                     <Table aria-label="voyage table" className="voyage_table">
                         <TableHead>
                         <TableRow>
-                            <TableCell align="center">YE LOCATION</TableCell>
-                            <TableCell align="center">LONG</TableCell>
-                            <TableCell align="center">LAT</TableCell>
-                            <TableCell align="center">YE SUNRISE</TableCell>
-                            <TableCell align="center">YE SUNSET</TableCell>
-                            <TableCell align="center">YE VOYAGE</TableCell>
-                            <TableCell align="center">YE VOYAGE SUNRISE</TableCell>
-                            <TableCell align="center">YE align="center" VOYAGE SUNSET</TableCell>
+                            <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE LOCATION</TableCell>
+                            {/* <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>LONG</TableCell>
+                            <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>LAT</TableCell> */}
+                            <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE SUNRISE</TableCell>
+                            <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE SUNSET</TableCell>
+                            <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE VOYAGE</TableCell>
+                            <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE VOYAGE SUNRISE</TableCell>
+                            <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "25px"}}>YE VOYAGE SUNSET</TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
                         {voyages.map((voyage, index) => (
-                            <TableRow key={index}>
-                                    <TableCell align="center">{voyage.data.givenLocation}</TableCell>
-                                    <TableCell align="center">{voyage.data.longitude}</TableCell>
-                                    <TableCell align="center">{voyage.data.latitude}</TableCell>
-                                    <TableCell align="center">{voyage.data.givenSunrise}</TableCell>
-                                    <TableCell align="center">{voyage.data.givenSunset}</TableCell>
-                                    <TableCell align="center">{voyage.data.foundLocation}</TableCell>
-                                    <TableCell align="center">{voyage.data.foundSunrise}</TableCell>
-                                    <TableCell align="center">{voyage.data?.foundSunset}</TableCell>
+                            <TableRow key={index} className="voyage_info_container">
+                                    <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.givenLocation} ({voyage.data.latitude}, {voyage.data.longitude})</TableCell>
+                                    {/* <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.longitude}</TableCell> */}
+                                    {/* <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.latitude}</TableCell> */}
+                                    <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.givenSunrise}</TableCell>
+                                    <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.givenSunset}</TableCell>
+                                    <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.foundLocation} ({voyage.data.foundLat}, {voyage.data.foundLong})</TableCell>
+                                    <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.foundSunrise}</TableCell>
+                                    <TableCell align="center" sx={{fontFamily:"Pirata One", fontSize: "15px"}}>{voyage.data.foundSunset}</TableCell>
                             </TableRow>
                         ))}
                         </TableBody>

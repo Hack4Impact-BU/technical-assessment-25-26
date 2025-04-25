@@ -15,10 +15,10 @@ const Tabs = () => {
     return (
         <>
             <div className="button_container">
-                <Button variant="outlined" onClick={() => handleChange(0)}>
-                    Ye Map
+                <Button variant="contained" id="map_button" onClick={() => handleChange(0)}>
+                    Ye Map<img id="skull_img" src="../../../public/skull.png"/>
                 </Button>
-                <Button variant="outlined" onClick={() => handleChange(1)}>
+                <Button variant="contained" id="voyage_button" sx={{fontFamily: "Pirata One", fontSize: "20px"}} onClick={() => handleChange(1)}>
                     LOG O' VOYAGES
                 </Button>
             </div>

@@ -1,22 +1,27 @@
 .voyage_table {
     width: 90vw;
-    height: 50vh;
-    border: 2px solid #3d1c07;
+    max-height: 48vh;
     border-radius: 4px;
-    background-color: #fff;
-}
-
-[aria-label="voyage_table_column"] {
-    border: 2px solid #3d1c07;
-    margin: none;
-    font-size: 30px;
+    background-color: #f1debb;
 }
 
 .voyage_info_container{
     display:flex;
     justify-content: space-evenly;
     align-items: center;
-    border: 2px solid #3d1c07;
     width: 90vw;
-    height: 50px;
+    max-height: 50px;
+}
+
+.voyage_table_container {
+    overflow-y: scroll;
+    border: 2px solid #3d1c07;
+    max-height: 45vh;
+    width: 90vw;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #3d1c07;
+    font-size: 40px;
 }

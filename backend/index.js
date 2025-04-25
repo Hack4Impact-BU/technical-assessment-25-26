@@ -34,6 +34,8 @@ const model = genAI.getGenerativeModel({
         latitude: the exact latitude that was given to you
         longitude: the exact longitude that was given to you
         foundLocation: the city name of the matched location in “City, State, Country” format
+        foundLocationLat: the exact latitude that you found
+        foundLocationLong: the exact longitude that you found
         sunrise: the found location’s sunrise time in 12-hour “HH:MM:SS AM/PM” format 
         sunset: the found location’s sunset time in 12-hour “HH:MM:SS AM/PM” format
         Do not include any explanatory text or metadata—only the valid JSON response.
