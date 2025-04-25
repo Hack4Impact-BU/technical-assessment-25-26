@@ -17,13 +17,13 @@ Please check off which features you have implemented:
 - [x] Deploy the frontend and backend if you can using some of the free deployment tools we talked about in the workshops!
 
 ## Screen Recording 
-**Link**: [paste it here]
+**Link**: [https://drive.google.com/file/d/1sYiBt9qoaCzJIoc0e0rFjfFg69vtRT61/view?usp=sharing]
 
 ## Written Portion
 1. **How did the project go? What parts of it did you most enjoy / find yourself good at?**
 
-[answer here]
+[I thought the project was overall enjoyable in learning how to code a full stack web application. I thought that slowly progressing the backend was cool to see overtime. Starting with the simple sunsetsunrise.js functiions for lat and lon to the entire backend comeplete. Styling the web application was also enjoyable. ]
 
 2. **Was this technical assessment what you expected? If you had another two weeks to work on it, what would you add or change?**
 
-[answer here]
+[At first I did not think it was as much, but I did have to work on some backend requests for extended time. Specifically, training the gemini response to what I felt was good took some time. If I had two more weeks to work on this project, I would add more features to the website. I would add a search bar to search cities on the map and even the history page. In addition I would add a feature that allows the use to favorite certain places. Lastly, I think the website would benefit from mobile optimatization allowing users to access the website on mobile devices without any troubles. ]
