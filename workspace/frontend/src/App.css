@@ -1,0 +1,21 @@
+body {
+  font-family: "JT Marnie";
+  font-weight: bold;
+  background-color: #ebebeb;
+  color: #6f7682;
+  text-align: center;
+}
+
+#Map {
+  aspect-ratio: 5/3;
+  height: 75%;
+  width: 75%;
+  margin: auto; /* Automatically center it*/
+  border-radius: 20px;
+}
+
+#Title {
+  height: 75%;
+  width: 75%;
+  margin: auto; /* Automatically center it*/
+}

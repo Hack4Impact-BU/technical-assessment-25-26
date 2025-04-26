@@ -1,0 +1,59 @@
+.wrapper {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.accordion {
+    border-radius: 10px;
+    background: #9da8b0;
+    width: 700px;
+}
+
+
+.coordinates {
+    border-radius: 10px;
+    background: #c4ccd4;
+    display: flex;
+    justify-content: space-between
+}
+
+.accordion .page {
+    text-align: center;
+}
+
+.btn-link {
+    margin-left: 15px;
+    display: inline-block;
+    padding: 5px 10px;
+    background: #2859a7;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+.btn-link:hover {
+    background: #1c3f76;
+}
+
+.item {
+    margin-bottom: 5px;
+    padding: 10px 20px;
+}
+
+.response {
+    border-radius: 10px;
+    margin-top: 5px;
+    background: #dae5ef;
+    max-height: 0;
+    transition: all .5s cubic-bezier(0,1,0,1);
+    overflow: hidden;
+}
+
+.response.show {
+    height: auto;
+    max-height: 9999px;
+    transition: all .5s cubic-bezier(1,0,1,0)
+}
+
