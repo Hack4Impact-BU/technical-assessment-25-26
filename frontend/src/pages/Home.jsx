@@ -17,14 +17,15 @@ export default function Home() {
   const [error, setError] = useState(null);
 
   const handleMapClick = async (latlng) => {
-    console.log('Frontend clicked at:', latlng); // add this
-  
+    console.log('Frontend clicked at:', latlng);
+
     setMarker(latlng);
     setTimes(null);
     setError(null);
-  
+
     try {
       const data = await getSunriseSunset(latlng.lat, latlng.lng);
+      console.log('Data received from backend:', data);
       setTimes(data);
     } catch (err) {
       console.error(err);
@@ -35,7 +36,7 @@ export default function Home() {
   return (
     <div>
       <h1>Welcome to Sol Atlas</h1>
-      <p>Click anywhere on the map to discover sunrise and sunset times!</p>
+      <p>Click anywhere on the map to discover sunrise, sunset, and a similar location!</p>
 
       <MapContainer center={[0, 0]} zoom={2} style={{ height: '500px', width: '100%' }}>
         <TileLayer
@@ -51,6 +52,9 @@ export default function Home() {
                 <div>
                   <div><strong>Sunrise:</strong> {new Date(times.sunrise).toLocaleTimeString()}</div>
                   <div><strong>Sunset:</strong> {new Date(times.sunset).toLocaleTimeString()}</div>
+                  {times.similarPlace && (
+                    <div><strong>Similar Location:</strong> {times.similarPlace}</div>
+                  )}
                 </div>
               ) : (
                 <div>Loading...</div>
