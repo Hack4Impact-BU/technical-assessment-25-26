@@ -1,0 +1,10 @@
+.leaflet-container {
+  margin: auto;
+  width: 90%;
+  height: 500px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #000000;
+  border-radius: 40px;
+}

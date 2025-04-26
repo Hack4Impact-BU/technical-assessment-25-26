@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Mina:wght@400;700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
