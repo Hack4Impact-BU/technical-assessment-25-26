@@ -1,0 +1,7 @@
+.map-container {
+    height: 600px; /* Increase the height */
+    width: 100%;   /* Make it full width */
+    margin: 0 auto; /* Center the map */
+    border: 2px solid #ccc; /* Optional: Add a border */
+    border-radius: 8px; /* Optional: Add rounded corners */
+}
