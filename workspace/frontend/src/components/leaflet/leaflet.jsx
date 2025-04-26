@@ -157,7 +157,7 @@ export default function Leaflet() {
                     <br/>
                     Sunset: {new Date(sunInfo[1]).toLocaleTimeString()} local time
                     <br/>
-                     <p style = {{whiteSpace: 'pre-wrap'}}>Similar Sunset Location: {geminiOutput} </p>
+                     <p style = {{whiteSpace: 'pre-wrap'}}>Similar Sunset Location:<br/> {geminiOutput} </p>
 
                 </Popup>
             </Marker>
