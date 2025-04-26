@@ -147,7 +147,7 @@ export default function Leaflet() {
 
             <Marker position={position}>
                 <Popup>
-                    You are here at position:
+                    <strong>You are here at position:</strong>
                     <br />
                     Latitude: {position.lat.toFixed(4)}
                     <br/>
@@ -157,7 +157,7 @@ export default function Leaflet() {
                     <br/>
                     Sunset: {new Date(sunInfo[1]).toLocaleTimeString()} local time
                     <br/>
-                     <p style = {{whiteSpace: 'pre-wrap'}}>Similar Sunset Location:<br/> {geminiOutput} </p>
+                     <p style = {{whiteSpace: 'pre-wrap'}}><strong>Similar Sunset Location:</strong><br/>{geminiOutput}</p>
 
                 </Popup>
             </Marker>
