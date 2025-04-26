@@ -3,8 +3,7 @@ import { Location } from "@/types";
 import {useEffect, useState} from "react";
 
 // Initialize AI model
-//const geminiKey = process.env.GEMINI_API as a string
-const geminiKey = "AIzaSyAdduMJuIN3Wd8KaerUUIngBBj91CsmZsk"
+const geminiKey = import.meta.env.VITE_GEMINI_API
 if (!geminiKey) {
     throw new Error("GEMINI_API is not defined");
 }
