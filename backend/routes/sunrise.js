@@ -4,6 +4,16 @@ import Location from '../models/Location.js';
 
 const router = express.Router();
 
+router.get('/history', async (req, res) => {
+  try {
+    const locations = await Location.find().sort({ timestamp: -1 });
+    res.json(locations);
+  } catch (err) {
+    console.error('Failed to fetch history:', err);
+    res.status(500).json({ error: 'Failed to fetch history' });
+  }
+});
+
 router.post('/', async (req, res) => {
   console.log('Received POST /api/sunrise with body:', req.body);
 
