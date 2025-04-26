@@ -19,7 +19,7 @@ Please check off which features you have implemented:
 Note: Frontend and Backend are set up, however, Heroku is giving build errors. I plan on fixing this issue even after the assessment deadline, as I am intrested to learning what it takes to deploy a full-stack website.
 
 ## Screen Recording 
-**Link**: [paste it here]
+**Link**: [\[paste it here\]](https://drive.google.com/file/d/1nCWcQT48VEmpcBMMLDEa4OeqGSQJvQh0/view?usp=sharing)
 
 ## Written Portion
 1. **How did the project go? What parts of it did you most enjoy / find yourself good at?**

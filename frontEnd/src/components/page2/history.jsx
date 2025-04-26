@@ -27,7 +27,7 @@ function History() {
   function fetchData() {
     (async () => {
       try {
-        const res = await fetch('http://dry-shelf-72596:4000/positions')
+        const res = await fetch('http://localhost:4000/positions')
 
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         const json = await res.json()
@@ -46,7 +46,7 @@ function History() {
   const handleDelete = async () => {
     if (!window.confirm('Are you sure you want to delete all history?')) return
     try {
-      const res = await fetch('http://dry-shelf-72596:4000/positions/data', { method: 'POST' })
+      const res = await fetch('http://localhost:4000/positions/data', { method: 'POST' })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       await fetchData()
     } catch (err) {

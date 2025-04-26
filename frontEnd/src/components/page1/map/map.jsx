@@ -12,7 +12,7 @@ function Map() {
     // Sends location data to the server for AI response
     async function postPosition() {
         try {
-            const res = await fetch('http://dry-shelf-72596:4000/ai', {
+            const res = await fetch('http://localhost:4000/ai', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', },
                 body: JSON.stringify({ lat: position.lat, lng: position.lng, sunRise: sunRises, sunSet: sunSets }),
