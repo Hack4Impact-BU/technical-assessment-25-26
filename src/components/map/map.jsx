@@ -45,8 +45,22 @@ function Map() {
                 console.log('Backend response data:', data); // Log the response data
 
                 setSimilarLocation(data.similarLocation || 'No similar location found');
+
+                // Save marker data to MongoDB
+                await fetch('http://localhost:4000/api/save-marker', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        lat: marker.lat,
+                        lng: marker.lng,
+                        geminiOutput: data.similarLocation,
+                    }),
+                });
+                console.log('Marker saved to MongoDB');
             } catch (error) {
-                console.error('Error fetching similar location:', error);
+                console.error('Error fetching similar location or saving marker:', error);
                 setSimilarLocation('Error fetching similar location');
             }
         };
