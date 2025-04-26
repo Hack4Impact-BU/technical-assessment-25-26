@@ -17,7 +17,7 @@ Please check off which features you have implemented:
 - [] Deploy the frontend and backend if you can using some of the free deployment tools we talked about in the workshops!
 
 ## Screen Recording 
-**Link**: [paste it here]
+**Link**: [[paste it here]](https://drive.google.com/file/d/1e6XBsMbjKOdwhhd1L4Ix43I_3_0cAg5q/view?usp=sharing)
 
 ## Written Portion
 1. **How did the project go? What parts of it did you most enjoy / find yourself good at?** I believe the project went very well. I really enjoyed playing around with the UI, especially when it came to overriding the map's initial configurations and customizing the Popup component. Since I had experience with the Requests library from Python, I found working myself with the backend much easier than I anticpated, most notably because I am familiar with the aspects of working with network calls, handling promises, and catching exceptions. Specifically, I found myself most skilled with managing MongoDB and also the SessionStorage, as I knew how such saved data gets stored and how to parse it as a JSON object. In general, I enjoyed the React Framework the most. I found it really simple to work with the UI and the functionality behind it, and it honestly made web development seem that much less intimidating. 
