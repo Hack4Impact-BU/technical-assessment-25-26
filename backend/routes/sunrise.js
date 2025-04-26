@@ -1,6 +1,7 @@
 import express from 'express';
 import { getSunrise, getSunset } from 'sunrise-sunset-js';
 import Location from '../models/Location.js';
+import { findSimilarSunTimesPlace } from '../utils/gemini.js';
 
 const router = express.Router();
 
@@ -27,20 +28,27 @@ router.post('/', async (req, res) => {
   const sunset = getSunset(lat, lng);
 
   try {
+    const similarPlace = await findSimilarSunTimesPlace(
+      sunrise.toISOString(),
+      sunset.toISOString()
+    );
+
     const newLocation = new Location({
       lat,
       lng,
       sunrise: sunrise.toISOString(),
       sunset: sunset.toISOString(),
+      similarPlace
     });
 
     await newLocation.save();
 
     res.json({
+      lat,
+      lng,
       sunrise: sunrise.toISOString(),
       sunset: sunset.toISOString(),
-      lat,
-      lng
+      similarPlace
     });
   } catch (err) {
     console.error('Failed to save location:', err);

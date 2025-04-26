@@ -5,6 +5,7 @@ const locationSchema = new mongoose.Schema({
   lng: Number,
   sunrise: String,
   sunset: String,
+  similarPlace: String,
   timestamp: {
     type: Date,
     default: Date.now
