@@ -1,26 +1,69 @@
-body {
-    font-family: "Mina";
-    background-color: #ffffff;
-  }
+.home {
+  background-image: linear-gradient(45deg, #4367e9, #38f9d7);
+  background-size: cover;
+  background-position: center;
+  height: 125vh;
+  font-family: "Mina";
+}
 
-  h1 {
-    text-align: center;
-    font-size: 50px;
-    margin-top: 30px;
-    color: #1e3f07;
-  }
-  
-  #history {
-    width: 60%;
-    margin: 30px auto;
-    background-color: #16a768;
-    padding: 30px;
-    align-items: center;
-    display: flex;
+h1 {
+  text-align: center;
+  font-size: 50px;
+  margin-top: 30px;
+  color: #000000;
+}
 
-  }
+#basic-button {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin: center;
+}
 
-  #history h2 {
-    font-size: 30px;
-    color: #ffffff;
-  }
+#menu {
+  margin: 5px auto;
+  align-items: center;
+  display: flex;
+
+}
+
+#history h2 {
+  color: #42189b;
+}
+
+#instruction {
+  text-align: center;
+}
+
+.history-accordion.MuiAccordion-root {
+  background: #fafafa;
+  border: 1px solid #b13d3d;
+  width: 75%;
+  margin: auto;
+  justify-content: center;
+}
+
+.history-accordion .MuiAccordionSummary-root {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  margin: auto;
+  justify-content: center;
+}
+
+.history-accordion .MuiAccordionSummary-expandIcon {
+  color: #1976d2;
+  margin: auto;
+  justify-content: center;
+}
+
+.history-accordion .MuiAccordionDetails-root {
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  margin: auto;
+  justify-content: center;
+}
