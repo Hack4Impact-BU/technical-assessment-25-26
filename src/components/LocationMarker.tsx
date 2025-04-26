@@ -1,5 +1,6 @@
 import {useState} from "react"
 import {Marker, Popup, useMapEvents} from "react-leaflet"
+import 'leaflet/dist/leaflet.css';
 import { LatLng } from 'leaflet'
 import GetSunriseSunset from "./GetSunriseSunset.tsx"
 
