@@ -10,12 +10,11 @@ import './App.css';
 
 
 function App() {
-    const [position, setPosition] = useState([34.05223, -118.24368]);
     return (
         <>
             <Navbar/>
             <Welcome/>
-            <MapBox position={position} setPosition={setPosition}/>
+            <MapBox/>
         </>
     )
 }

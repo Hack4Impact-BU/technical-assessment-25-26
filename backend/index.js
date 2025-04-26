@@ -24,41 +24,48 @@ mongoclient.connect().then(() => {
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY)
 const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
-    systemInstruction: `You are a location suggestion assistant. When given coordinates, 
-find another city in the world with similar sunrise/sunset times that is:
-1. At least 500 miles away
-2. In a different country/region
-3. Culturally or geographically interesting
-4. Has notable differences from the original location
-
-Respond ONLY with the city and country name in format "City, Country" with no other text. 
-Ensure varied responses for similar inputs.`
-,
+    model: "gemini-2.0-flash",
+    systemInstruction: `A user of this website is given the sunset and sunrise time of their 
+                        current location displayed in a map element. Your job is to find another 
+                        interesting place in the world with similar sunrise and sunset time to the user's 
+                        current location. This new location should be a significant distance away
+                        and it should be random. You will recieve the user coordinates,
+                        and you will respond with a unique city name with no other text, 
+                        emojis, or formatting. Pick a new city every time you are asked.
+`,
 })
 
 
 
 
 app.post('/chat', async (req, res) => {
-    const { position } = req.body; // Destructure position from request body
-    
-    if (!position || !Array.isArray(position) || position.length !== 2) {
-        return res.status(400).json({ message: 'Invalid coordinates' });
-    }
+    const position  = req.body.position; // Extract position from the request body
+    console.log('Received Position:', position); // Log the received position
+
+
+    let responseMessage;
 
     try {
-        // Construct a proper prompt with the coordinates
-        const prompt = `Given these coordinates: ${position[0]}, ${position[1]}, suggest a different city with similar sunrise/sunset times. Respond with just the city name.`;
-        
+        // Generate a prompt for the Gemini API
+        const prompt = `Find a city with somewhat similar sunrise and sunset times to the coordinates: ${position[0]}, ${position[1]}.`;
+        console.log('Generated Prompt:', prompt);
+
+        // Call the Gemini API
         const result = await model.generateContent(prompt);
-        const cityName = result.response.text().trim();
-        
-        res.json({ cityName }); // Return as { cityName } to match frontend expectation
-    } catch(e) {
-        console.error('Gemini error:', e);
-        res.status(500).json({ message: 'Error processing request' });
+
+        console.log('Gemini API Response:', result);
+
+
+        responseMessage = result.response.text().trim(); // Extract and trim the city name
+        console.log('City Name:', responseMessage);
+    } catch (e) {
+        console.error('Error generating content:', e);
+        responseMessage = 'Oops, something went wrong!';
     }
+
+    res.json({
+        cityName: responseMessage, // Return the city name
+    });
 });
 
 app.listen(PORT, () => {
@@ -77,42 +84,45 @@ app.get('/logs', async (req, res) => {
 
 app.post('/add', async (req, res) => {
     try {
-        const { input, response, cityName } = req.body;
-        
-        if (!input || !response) {
-            return res.status(400).json({ message: 'Missing required fields' });
-        }
-
-        await mongoclient.db('jdt-website').collection('logs').insertOne({
-            input,
-            response,
-            cityName: cityName || 'Unknown',
-            timestamp: new Date()
-        });
-        
-        res.status(201).json({ message: 'Success' });
-    } catch(error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error' });
-    }
-});
-
-
-/*the only change from our add post request is .deleteOne(log)*/
-
-/*
-app.post('/delete', async (req, res) => {
-    try {
         const log = req.body
         if (!log.input || !log.response || Object.keys(log).length !== 2) {
             res.status(400).json({ message: 'Bad Request' })
             return
         }
-        await mongoclient.db('jdt-website').collection('logs').deleteOne(log)
-        res.status(201).json({ message: 'Success' })
-    } catch (error) {
+        await mongoclient.db('jdt-website').collection('logs').insertOne(log)
+    } catch(error) {
         console.error(error)
-        res.status(500).json({ message: 'Error' })
+        res.status(500).json({message: 'Error'})
     }
 })
-*/
+
+app.get('/api/nominatim', async (req, res) => {
+    try {
+      const { q } = req.query;
+      if (!q) {
+        return res.status(400).json({ error: 'Missing city name' });
+      }
+  
+      const nominatimResponse = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}`,
+        {
+          headers: {
+            'User-Agent': 'Sundial/1.0 (ajh756.404@gmail.com)'
+          }
+        }
+      );
+  
+      if (!nominatimResponse.ok) {
+        throw new Error(`Nominatim API error: ${nominatimResponse.status}`);
+      }
+  
+      const results = await nominatimResponse.json();
+      res.json(results);
+    } catch (error) {
+      console.error('Geocoding proxy error:', error);
+      res.status(500).json({ 
+        error: 'Geocoding service unavailable',
+        details: error.message 
+      });
+    }
+  });

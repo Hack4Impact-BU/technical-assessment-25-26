@@ -1,8 +1,9 @@
 import { getSunrise, getSunset } from 'sunrise-sunset-js';
 import { useState } from 'react';
+import useGeolocation from '../../hooks/useGeolocation.jsx';
 
-export default function Sun({position, setPosition}) {
-    const [locationFound, setLocationFound] = useState(false);
+export default function Sun() {
+    const { position, locationFound, error, isLoading } = useGeolocation();
     if (navigator.geolocation && !{locationFound}) {
         navigator.geolocation.getCurrentPosition(
             (pos) => {

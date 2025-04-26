@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react';
 import { getSunrise, getSunset } from 'sunrise-sunset-js';
+import useGeolocation from '../../hooks/useGeolocation.jsx';
 import './chat.css';
 
-function Chat({ position }) {
+function Chat() {
+    const { position, locationFound } = useGeolocation();
     const [locations, setLocations] = useState([]);
+    const [newLocation, setNewLocation] = useState([0, 0]);
     const [location, setLocation] = useState([0, 0]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [cityName, setCityName] = useState('');
+    
     const [sunTimes, setSunTimes] = useState({
         sunrise: '',
         sunset: ''
     });
-
+    console.log("called chat");
     async function getResponse() {
         if (!position) return;
         
@@ -35,50 +39,39 @@ function Chat({ position }) {
 
             const { cityName: fetchedCityName } = await response.json();
             setCityName(fetchedCityName);
+        
+            console.log(fetchedCityName)
+
             
+        
             // 2. Fetch coordinates from OpenStreetMap
             const osmResponse = await fetch(
-                `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(fetchedCityName)}`
-            );
+                `http://localhost:4000/api/nominatim?q=${encodeURIComponent(fetchedCityName)}`,
+                {
+                  method: 'GET', // Explicitly state GET (optional but recommended)
+                  headers: {
+                    'User-Agent': 'Sundial/1.0 (ajh756.404@gmail.com)',
+                    'Accept-Language': 'en-US,en;q=0.9'
+                  }
+                  // No body for GET requests!
+                }
+              );
+            console.log(osmResponse);
             
             if (!osmResponse.ok) {
                 throw new Error('Failed to fetch coordinates');
             }
-
             const osmData = await osmResponse.json();
             console.log('OSM Data:', osmData);
-
+            
+            
+            
             if (osmData.length > 0) {
                 const firstResult = osmData[0];
-                const newLocation = [parseFloat(firstResult.lat), parseFloat(firstResult.lon)];
+                setNewLocation([firstResult.lat, firstResult.lon]);
+                console.log("newlocation:", newLocation)
                 setLocation(newLocation);
-
-                // Calculate sunrise/sunset times
-                const sunrise = getSunrise(newLocation[0], newLocation[1]);
-                const sunset = getSunset(newLocation[0], newLocation[1]);
-                setSunTimes({
-                    sunrise: sunrise.toTimeString(),
-                    sunset: sunset.toTimeString()
-                });
-
-                // 3. Save to your backend
-                await fetch('http://localhost:4000/add', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ 
-                        input: position, 
-                        response: newLocation,
-                        cityName: fetchedCityName
-                    })
-                });
-
-                setLocations(prev => [...prev, {
-                    position,
-                    location: newLocation,
-                    cityName: fetchedCityName
-                }]);
+                
             } else {
                 throw new Error('City not found in OpenStreetMap');
             }
@@ -90,53 +83,50 @@ function Chat({ position }) {
         }
     }
 
+    
     useEffect(() => {
-        // Load initial logs
-        const fetchLogs = async () => {
-            try {
-                const response = await fetch('http://localhost:4000/logs');
-                if (!response.ok) {
-                    throw new Error('Failed to load logs');
-                }
-                const data = await response.json();
-                const newLocations = data.map(item => ({
-                    position: item.input,
-                    location: item.response,
-                    cityName: item.cityName || 'Unknown'
-                }));
-                setLocations(newLocations);
-            } catch (error) {
-                console.error('Error loading logs:', error);
-                setError(error.message);
-            }
-        };
-
-        fetchLogs();
-    }, []);
+        console.log('Updated cityName:', cityName);
+    }, [cityName]);
 
     useEffect(() => {
-        // Call getResponse when position changes
+        if (newLocation[0] !== 0 && newLocation[1] !== 0) {
+            const sunrise = getSunrise(newLocation[0], newLocation[1]);
+            const sunset = getSunset(newLocation[0], newLocation[1]);
+            setSunTimes({
+                sunrise: sunrise.toLocaleTimeString(),
+                sunset: sunset.toLocaleTimeString(),
+            });
+        }
+    }, [newLocation]);
+
+    useEffect(() => {
         if (position && position[0] !== 0 && position[1] !== 0) {
             getResponse();
         }
     }, [position]);
+    
+    
+    
+
 
 
     return (
         <div className="chat-container">
-            {isLoading && <div className="loading">Finding matching location...</div>}
             {error && <div className="error">Error: {error}</div>}
             
             <h2>Another Location in the World:</h2>
             {cityName && <h3>{cityName}</h3>}
             
             <div className="sun-times">
-                <p>Sunrise: {sunTimes.sunrise || 'Calculating...'}</p>
-                <p>Sunset: {sunTimes.sunset || 'Calculating...'}</p>
+            <p>Sunrise: {sunTimes.sunrise || 'Calculating...'}</p>
+            <p>Sunset: {sunTimes.sunset || 'Calculating...'}</p>
             </div>
+            
 
         </div>
     );
 }
+
+
 
 export default Chat;
