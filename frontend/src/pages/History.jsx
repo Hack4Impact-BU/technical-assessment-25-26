@@ -1,25 +1,53 @@
 import { useEffect, useState } from 'react';
-import { getHistory } from '../api/historyAPI';
-import { Typography, Box, CircularProgress, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import { getHistory, clearHistory } from '../api/historyAPI';
+import {
+  Button,
+  Box,
+  Typography,
+  CircularProgress,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell
+} from '@mui/material';
 
 export default function History() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getHistory().then(data => {
-      setHistory(data);
-      setLoading(false);
-    }).catch(() => {
-      setLoading(false);
-    });
+    getHistory()
+      .then(data => {
+        setHistory(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }, []);
+
+  const handleClearHistory = async () => {
+    try {
+      await clearHistory();
+      setHistory([]); // Clear UI state
+    } catch (err) {
+      alert('Failed to clear history');
+    }
+  };
 
   return (
     <Box p={3}>
-      <Typography variant="h4" gutterBottom>Click History</Typography>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+        <Typography variant="h4">Click History</Typography>
+        <Button variant="outlined" color="error" onClick={handleClearHistory}>
+          Clear History
+        </Button>
+      </Box>
 
-      {loading ? <CircularProgress /> : (
+      {loading ? (
+        <CircularProgress />
+      ) : (
         <Table>
           <TableHead>
             <TableRow>

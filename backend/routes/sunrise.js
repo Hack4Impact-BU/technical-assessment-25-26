@@ -48,4 +48,14 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.delete('/history', async (req, res) => {
+  try {
+    await Location.deleteMany({});
+    res.json({ message: 'History cleared' });
+  } catch (err) {
+    console.error('Failed to clear history:', err);
+    res.status(500).json({ error: 'Failed to clear history' });
+  }
+});
+
 export default router;
