@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import sunriseRoutes from './routes/sunrise.js'; // 👈 add this line
 
 dotenv.config();
+// debugging the gemini API key
+console.log("Loaded GEMINI key:", process.env.GEMINI_API_KEY);
 
 const app = express();
 
