@@ -11,7 +11,7 @@ console.log("Loaded GEMINI key:", process.env.GEMINI_API_KEY);
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://technical-assessment-25-26-1.onrender.com',
   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
 }));
