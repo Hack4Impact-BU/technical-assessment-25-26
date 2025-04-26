@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import { useState } from 'react';
 import { getSunriseSunset } from '../api/sunriseAPI';
+import { Typography, Box, Paper, Container } from '@mui/material';
 
 function ClickableMap({ onClick }) {
   useMapEvents({
@@ -18,14 +19,11 @@ export default function Home() {
 
   const handleMapClick = async (latlng) => {
     console.log('Frontend clicked at:', latlng);
-
     setMarker(latlng);
     setTimes(null);
     setError(null);
-
     try {
       const data = await getSunriseSunset(latlng.lat, latlng.lng);
-      console.log('Data received from backend:', data);
       setTimes(data);
     } catch (err) {
       console.error(err);
@@ -34,35 +32,49 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <h1>Welcome to Sol Atlas</h1>
-      <p>Click anywhere on the map to discover sunrise, sunset, and a similar location!</p>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Paper elevation={3} sx={{ p: 4, mb: 3 }}>
+        <Typography variant="h3" sx={{ fontFamily: 'cursive', fontWeight: 'bold', mb: 1 }}>
+          Welcome to Sol Atlas
+        </Typography>
+        <Typography variant="subtitle1" sx={{ color: 'text.secondary' }}>
+          Click anywhere on the map to discover sunrise, sunset, and a location with a similar sunrise/sunset time!
+        </Typography>
+      </Paper>
 
-      <MapContainer center={[0, 0]} zoom={2} style={{ height: '500px', width: '100%' }}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; OpenStreetMap contributors'
-        />
-        <ClickableMap onClick={handleMapClick} />
-        {marker && (
-          <Marker position={[marker.lat, marker.lng]}>
-            <Popup>
-              {error && <div>{error}</div>}
-              {times ? (
-                <div>
-                  <div><strong>Sunrise:</strong> {new Date(times.sunrise).toLocaleTimeString()}</div>
-                  <div><strong>Sunset:</strong> {new Date(times.sunset).toLocaleTimeString()}</div>
-                  {times.similarPlace && (
-                    <div><strong>Similar Location:</strong> {times.similarPlace}</div>
-                  )}
-                </div>
-              ) : (
-                <div>Loading...</div>
-              )}
-            </Popup>
-          </Marker>
-        )}
-      </MapContainer>
-    </div>
+      <Box
+        component={Paper}
+        elevation={2}
+        sx={{
+          overflow: 'hidden',
+          borderRadius: 2,
+          height: '500px',
+        }}
+      >
+        <MapContainer center={[20, 0]} zoom={2} style={{ height: '100%', width: '100%' }}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; OpenStreetMap contributors'
+          />
+          <ClickableMap onClick={handleMapClick} />
+          {marker && (
+            <Marker position={[marker.lat, marker.lng]}>
+              <Popup>
+                {error && <div>{error}</div>}
+                {times ? (
+                  <div>
+                    <div><strong>Sunrise:</strong> {new Date(times.sunrise).toLocaleTimeString()}</div>
+                    <div><strong>Sunset:</strong> {new Date(times.sunset).toLocaleTimeString()}</div>
+                    <div><strong>Similar Location:</strong> {times.similarLocation}</div>
+                  </div>
+                ) : (
+                  <div>Loading...</div>
+                )}
+              </Popup>
+            </Marker>
+          )}
+        </MapContainer>
+      </Box>
+    </Container>
   );
 }
