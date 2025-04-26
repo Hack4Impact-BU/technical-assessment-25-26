@@ -1,0 +1,20 @@
+/* TODO: Change font later */
+/* @import url('https://fonts.googleapis.com/css2?family=Mina:wght@400;700&display=swap'); */
+
+/* @font-face {
+  font-family: 'JT-Marnie';
+  src: url('JTMarnoe-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+} */
+
+@import url('fonts/stylesheet.css');
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}

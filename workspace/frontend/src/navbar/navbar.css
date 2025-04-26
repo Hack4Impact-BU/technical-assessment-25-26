@@ -1,0 +1,27 @@
+#navbar {
+    display: flex;
+    justify-content: space-evenly;
+    background: #c1c6c6;
+    padding: 30px 0;
+    align-items: center;
+    margin-bottom: 50px;
+    color: #eff9ff;
+    font-size: 28px;
+}
+  
+#navbar a {
+    color: #c2cccc;
+    text-decoration: none;
+    font-size: 35px;
+    transition: color 0.2s;
+}
+  
+#navbar a:hover {
+    color: white;
+}
+
+.NavText {
+    font-family: "JT Marnie";
+    font-weight: bold;
+    -webkit-text-stroke: 1px rgb(255, 255, 255);
+}
