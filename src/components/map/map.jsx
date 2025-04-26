@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from 'react-leafl
 import React, { useEffect, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import getSolarEvents from './getSolarEvents';
+import './map.css'; 
 
 function AddMarkerOnDoubleClick({ setMarker }) {
     useMapEvent('dblclick', (e) => {
@@ -18,14 +19,12 @@ function Map() {
     useEffect(() => {
         if (!marker) return;
 
-        // Fetch sunrise and sunset for the marker location
         const events = getSolarEvents(marker.lat, marker.lng);
         setSolarEvents(events);
 
-        // Fetch similar location from the backend
         const fetchSimilarLocation = async () => {
             try {
-                console.log('Sending request to backend with marker:', marker); // Log the marker data
+                console.log('Sending request to backend with marker:', marker);
 
                 const response = await fetch('http://localhost:4000/api/similar-location', {
                     method: 'POST',
@@ -35,19 +34,19 @@ function Map() {
                     body: JSON.stringify({ lat: marker.lat, lng: marker.lng }),
                 });
 
-                console.log('Backend response status:', response.status); // Log the response status
+                console.log('Backend response status (similar-location):', response.status);
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch similar location');
                 }
 
                 const data = await response.json();
-                console.log('Backend response data:', data); // Log the response data
+                console.log('Backend response data (similar-location):', data);
 
                 setSimilarLocation(data.similarLocation || 'No similar location found');
 
                 // Save marker data to MongoDB
-                await fetch('http://localhost:4000/api/save-marker', {
+                const saveResponse = await fetch('http://localhost:4000/api/save-marker', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -58,10 +57,16 @@ function Map() {
                         geminiOutput: data.similarLocation,
                     }),
                 });
-                console.log('Marker saved to MongoDB');
+
+                console.log('Save marker response status:', saveResponse.status);
+
+                if (!saveResponse.ok) {
+                    throw new Error('Failed to save marker');
+                }
+
+                console.log('Marker saved successfully');
             } catch (error) {
                 console.error('Error fetching similar location or saving marker:', error);
-                setSimilarLocation('Error fetching similar location');
             }
         };
 
@@ -70,10 +75,11 @@ function Map() {
 
     return (
         <MapContainer
+            className="map-container"
             center={[51.505, -0.09]}
             zoom={13}
             scrollWheelZoom={false}
-            style={{ height: '400px', width: '100%' }}
+            style={{ height: 'calc(100vh - 90px)', width: '80%' }} // Adjust height to account for navbar
             doubleClickZoom={false}
         >
             <TileLayer

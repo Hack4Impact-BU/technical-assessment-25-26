@@ -35,7 +35,7 @@ app.post('/api/similar-location', async (req, res) => {
         return res.status(400).json({ error: 'Latitude and longitude are required' });
     }
 
-    const prompt = `Find a location on Earth with similar sunrise and sunset times as the location at latitude ${lat} and longitude ${lng}. Provide the latitude and longitude of the similar location.`;
+    const prompt = `Find a location on Earth with similar sunrise and sunset times as latitude ${lat} and longitude ${lng}. Provide the name of the new location, its latitude, and longitude in a single sentence. Provide one more sentence with a brief description of the location.`;
 
     try {
         const result = await model.generateContent([prompt]);

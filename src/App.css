@@ -1,27 +1,59 @@
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 99%; /* Ensure full width */
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    /* Remove max-width and padding to allow full width */
+    margin: 0;
+    text-align: center;
+}
+
+.App {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#navbar {
+    width: 100%; /* Make the navbar span the full width */
+    height: 80px; /* Set a fixed height for the navbar */
+    background-color: #e16c6c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+}
+
+.map-container {
+    flex: 1; /* Allow the map to take up all remaining space */
+    height: calc(100vh - 80px); /* Full viewport height minus navbar height */
+    width: 100%; /* Full width */
 }
 
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }ilter: drop-shadow(0 0 2em #646cffaa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.card {r: drop-shadow(0 0 2em #61dafbaa);
+  padding: 2em;
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+.read-the-docs {
+  color: #888; rotate(0deg);
+} }
   to {
     transform: rotate(360deg);
   }
@@ -39,4 +71,9 @@
 
 .read-the-docs {
   color: #888;
+}
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 1em;
 }

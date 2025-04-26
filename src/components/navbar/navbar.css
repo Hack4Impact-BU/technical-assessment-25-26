@@ -1,21 +1,27 @@
 #navbar {
+    background-color: #d86aeb;
+    color: white;
+    height: 80px; 
     display: flex;
-    justify-content: space-evenly;
-    background: #8d77ab;
-    padding: 30px 0;
     align-items: center;
-    margin-bottom: 50px;
-    color: #f5efff;
-    font-size: 28px;
+    justify-content: space-between;
+    padding: 0 20px; 
+    font-size: 1.5rem; 
 }
-  
+
+#navbar h1 {
+    font-size: 2rem; 
+    margin: 0;
+}
+
 #navbar a {
-    color: #f5efff;
+    color: white;
     text-decoration: none;
-    font-size: 35px;
-    transition: color 0.2s;
+    margin: 0 15px;
+    font-size: 1.2rem; 
+    transition: color 0.3s ease;
 }
-  
+
 #navbar a:hover {
-    color: #e5d9f2;
+    color: #989795; 
 }
