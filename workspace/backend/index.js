@@ -49,13 +49,13 @@ const model = genAI.getGenerativeModel({
         Find a **geographically distant** and **well-known city** that has **similar sunrise and sunset times** to the given location.
         
         Response format:
-        [City Name, Country]
+        City, Country
         Latitude: [Rounded to 4 decimals]
         Longitude: [Rounded to 4 decimals]
         Fun Fact: [One sentence, optional]
         
-        Do NOT return a location near the original coordinates. Use your judgment to match solar times closely and prioritize providing a correct
-        location over a high-population city.
+        Do NOT return a location near the original coordinates. Use your judgment to match solar times closely, accurately and prioritize providing a correct
+        location with similar sunset/sunrise times over a high-population city.
 
 
 `
