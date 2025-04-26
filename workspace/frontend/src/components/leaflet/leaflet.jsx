@@ -181,10 +181,14 @@ export default function Leaflet() {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
+                    <Marker position={[61.5937, -149.1246]}>
+                        <Popup>
+                            If you live here, you&#39;re awesome
+                        </Popup>
+                    </Marker>
                     <Marker position={[42.345, -71.103]}>
                         <Popup>
                             This is where I&#39;m from!
-
                         </Popup>
                     </Marker>
                     <LocationMarker></LocationMarker>
