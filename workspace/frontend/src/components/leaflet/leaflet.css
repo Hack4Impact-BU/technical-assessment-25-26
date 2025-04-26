@@ -1,0 +1,12 @@
+
+
+#map { height: 70vh;
+width: 80%;
+margin: auto;}
+
+#leafletContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

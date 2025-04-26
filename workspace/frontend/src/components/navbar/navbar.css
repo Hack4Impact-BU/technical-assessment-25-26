@@ -1,0 +1,24 @@
+#navbar {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px 0;
+    align-items: center;
+    margin-bottom: 50px;
+    color: #219ebc;
+    font-size: 28px;
+    background-image: linear-gradient(to top,  #D62828, #F77F00,#FCBF49,#EAE2B7);
+}
+/*background: #F28123;*/
+
+  
+#navbar a {
+    color: #f5efff;
+    text-decoration: none;
+    font-size: 35px;
+    transition: color 0.2s;
+}
+  
+#navbar a:hover {
+    color: #219ebc;
+}
+
