@@ -17,15 +17,14 @@ Please check off which features you have implemented:
 - [x] Deploy the frontend and backend if you can using some of the free deployment tools we talked about in the workshops!
 
 ## Screen Recording 
-**Link**: [paste it here]
+**Link**: https://drive.google.com/file/d/1php-dhi3ZFfVbYJbXOzTba-wrw-prT35/view?usp=sharing 
 
 ## Written Portion
 1. **How did the project go? What parts of it did you most enjoy / find yourself good at?**
 
-- The project's progress was faster than expected for the first steps. I didn't realize how expansive and easy to use js libraries were. The next difficult part was 
-
+- The project's progress was faster than expected for the first steps. I didn't realize how expansive and easy to use js libraries were. They were enjoyable to learn. It was tricky integrating the api call especially onto the popup but not really that bad. The design part was simple but fun.
 2. **Was this technical assessment what you expected? If you had another two weeks to work on it, what would you add or change?**
 
-   There was more instructions than I anticipated but it felt fairly clear. What I really wish I could have adde dwas the history. Given more time I would have made separate pages.
+   There was more instructions than I anticipated but it felt fairly clear. What I really wish I could have adde dwas the history. Given more time I would have made separate pages. Of course, the history page is not included in this, which I wish I added. The popup idea was cool, but I would have perfered a separate place where times could be given by the user to then recieve countries.
 
 
