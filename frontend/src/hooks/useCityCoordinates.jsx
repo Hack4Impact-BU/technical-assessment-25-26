@@ -46,5 +46,5 @@ export default function useCityCoordinates(cityName) {
     };
   }, [cityName]);
 
-  return { coordinates, loading, error };
+  return { coordinates };
 }

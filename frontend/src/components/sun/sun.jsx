@@ -4,23 +4,7 @@ import useGeolocation from '../../hooks/useGeolocation.jsx';
 
 export default function Sun() {
     const { position, locationFound, error, isLoading } = useGeolocation();
-    if (navigator.geolocation && !{locationFound}) {
-        navigator.geolocation.getCurrentPosition(
-            (pos) => {
-            setPosition([pos.coords.latitude, pos.coords.longitude]);
-            setLocationFound(true);
-            },
-            (err) => {
-            console.error("Geolocation error:", err);
-            setLocationFound(false);
-            },
-            {
-            enableHighAccuracy: true,
-            timeout: 5000,
-            maximumAge: 0
-            }
-        );
-        }
+    
     const sunset =  getSunset(position[0], position[1]).toLocaleTimeString();
     const sunrise = getSunrise(position[0], position[1]).toLocaleTimeString();
     return (
