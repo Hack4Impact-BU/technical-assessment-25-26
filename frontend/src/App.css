@@ -1,0 +1,66 @@
+body {
+  font-family: "Quicksand";
+  background-color: #ffd2ac;
+  color: #ff6821;
+}
+
+#welcome {
+  
+}
+
+#chat {
+  width: 60%;
+  margin: 30px auto;
+  background-color: #ffd2ac;
+  padding: 30px;
+  border-radius: 6px;
+}
+
+
+
+
+#chat h2{
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+
+.job {
+  background: #ffd2ac;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  width: 75%;
+  padding: 25px;
+}
+
+
+.job li {
+  margin-left: 25px;
+}
+
+button {
+  padding: 0.4rem 0.8rem;
+  border: 0.2rem solid #ff6821;
+  border-radius: 0.2rem;
+  background-color: #ff6821;
+  color: #ffd2ac;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background-color: #ffd2ac;
+  color: #ff6821;
+}
+
+#root {
+  height: 100vh;
+}
+
+
+

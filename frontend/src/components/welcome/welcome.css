@@ -1,0 +1,10 @@
+.welcome {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding: 1vw 5vw;
+    align-items: center;
+    margin-bottom: 50px;
+    color:#f84f00;
+    font-size: 28px;
+}
