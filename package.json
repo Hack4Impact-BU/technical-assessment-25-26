@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "mongoose": "^8.13.2",
     "sunrise-sunset-js": "^2.2.1"
   }
