@@ -5,7 +5,7 @@
     width: 90vw;
     border: 2px solid #3d1c07;
     margin: 2rem;
-    border-image: url("../../../public/border.jpg") 30% / 40px / 40px stretch;
+    border-image: url("../../../border.jpg") 30% / 40px / 40px stretch;
     border-image-outset: 5px;
 }
 
