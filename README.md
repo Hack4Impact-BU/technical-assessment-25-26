@@ -17,7 +17,7 @@ Please check off which features you have implemented:
 - [X] Deploy the frontend and backend if you can using some of the free deployment tools we talked about in the workshops!
 
 ## Screen Recording
-**Link**: https://drive.google.com/file/d/1Ci3wSWRGjQWumW_3QrXZszGqV4w-JgiO/view?usp=sharing
+**Link**: https://youtu.be/Tu79R-QmiQg
 https://here-comes-the-sun-25-26.vercel.app/
 
 ## Written Portion
