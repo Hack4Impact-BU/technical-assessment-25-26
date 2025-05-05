@@ -1,6 +1,8 @@
 # Sophia Tang's Submission
 **Date**: 4/25/2025
 
+**Deployment**: https://here-comes-the-sun-25-26.vercel.app/
+
 **BU Email**: sstang@bu.edu
 
 **Class Year**: 2027
@@ -18,7 +20,6 @@ Please check off which features you have implemented:
 
 ## Screen Recording
 **Link**: https://youtu.be/Tu79R-QmiQg
-https://here-comes-the-sun-25-26.vercel.app/
 
 ## Written Portion
 1. **How did the project go? What parts of it did you most enjoy / find yourself good at?**
