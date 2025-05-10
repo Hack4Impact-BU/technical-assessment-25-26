@@ -1,0 +1,28 @@
+.body_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button_container {
+    padding: 0;
+    margin: 0;
+    width: 25%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+#map_button,
+#voyage_button {
+    background-color: #3d1c07;
+    font-family: "Pirata One";
+    font-size: 20px;
+    width: 10rem;
+}
+
+#skull_img {
+    width: 20px;
+    margin: 5px;
+}

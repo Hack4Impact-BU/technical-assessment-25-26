@@ -1,0 +1,20 @@
+@import url("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
+
+.leaflet-container {
+    height: 50vh;
+    width: 90vw;
+    border: 2px solid #3d1c07;
+    margin: 2rem;
+    border-image: url("../../../border.jpg") 30% / 40px / 40px stretch;
+    border-image-outset: 5px;
+}
+
+.leaflet-control-attribution {
+    display: none;
+}
+
+.map_popup_container {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+}

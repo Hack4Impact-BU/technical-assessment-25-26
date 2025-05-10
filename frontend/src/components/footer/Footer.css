@@ -1,0 +1,16 @@
+#ocean {
+    width: 100vw;
+    position: fixed;
+    bottom: -30px;
+    left: 0;
+    z-index: 999;
+}
+
+#ship {
+    width: 5vw;
+    position: fixed;
+    bottom: 10%;
+    left: 68%;
+    rotate: -33deg;
+    z-index: 1000;
+}
