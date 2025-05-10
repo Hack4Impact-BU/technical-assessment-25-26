@@ -1,0 +1,46 @@
+body {
+    font-family: "instrument-serif", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #FFB487;
+    /* comment out the following if i decide not to go w an image background */
+    background-image: url("./assets/sunrise5.jpg");
+    height: 100vh;
+    width: 100vw;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    color: #161515;
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+h1 {
+    font-family: "National Park", sans-serif;
+    color: #ffffff;
+    font-size: 2rem;
+    text-align: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+#info {
+    margin-top: 63vh;
+    z-index: 3;
+    pointer-events: none;
+}
+
+body.dark-mode {
+    background-color: #1F2835;
+    /* comment out the following if i decide not to go w an image background */
+    background-image: url("./assets/sunset.jpg");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+}
+
+body {
+    overflow: hidden;
+}

@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Mina:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Instrument+Serif:ital@0;1&family=Pochaevsk&display=swap');
+@import url("https://use.typekit.net/aac3krw.css");
+@import url("https://use.typekit.net/aac3krw.css");
+@import url("https://use.typekit.net/aac3krw.css");
+@import url("https://use.typekit.net/aac3krw.css");
+@import url("https://use.typekit.net/aac3krw.css");
+@import url('https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow: hidden;
+}

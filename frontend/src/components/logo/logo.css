@@ -1,0 +1,14 @@
+.logo {
+    width: 42%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 60px;
+    background-color: inherit;
+    z-index: 1;
+    margin: auto;
+    top: 62vh;
+    position: relative;
+    pointer-events: none;
+}

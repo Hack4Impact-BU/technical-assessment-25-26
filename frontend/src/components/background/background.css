@@ -1,0 +1,64 @@
+.bg {
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    pointer-events: none;
+}
+
+.container {
+    top: 8vh;
+    z-index: 0;
+    width: 80%;
+    height: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    position: absolute;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+}
+
+.map {
+    width: 95%;
+    height: 90%;
+    border-radius: 25px;
+    pointer-events: auto;
+}
+
+button {
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    pointer-events: auto;
+    z-index: 2;
+    border: 10px solid #ffffff;
+}
+
+button:hover {
+    background-color: #797d90;
+    color: #bead89;
+}
+
+.popup .leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    border-color: #9497A8;
+    border-width: 20px;
+    background-color: #ffffff;
+    color: #161515;
+    font-family: "National Park", sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+body {
+    overflow: hidden;
+}

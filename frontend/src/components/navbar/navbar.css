@@ -1,0 +1,45 @@
+/* gonna fix this and make it prettier after functionality working */
+
+#navbar {
+    position: absolute;
+    z-index: 3;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+	min-height: auto;
+	width: auto;
+	background-color: #ffffff;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    top: 40%;
+    transform: translate(0%, -50%);
+    gap: 20px;
+}
+
+button {
+    color: black;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover{
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.1);
+    background-color: #ffffff;
+    border: none;
+
+}
+
+#logoimg {
+    color: white;
+}

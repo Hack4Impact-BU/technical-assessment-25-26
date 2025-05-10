@@ -1,0 +1,82 @@
+.logsContainer {
+    width: 80vw;
+    height: 80vh;
+    top: 4vh;
+    background-color: white;
+    display: block;
+    margin: auto;
+    border-radius: 10px;
+    color: black;
+    font-family: "National Park", sans-serif;
+    font-size: 16px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;   
+    pointer-events: auto;
+}
+
+.logsContainer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: black;
+}
+
+.logsContainer li {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word;
+}
+
+.logsContainer li:last-child {
+    border-bottom: none;
+}
+
+.dark-mode {
+    background-color: #1F2835;
+    /* comment out the following if i decide not to go w an image background 
+    background-image: url("./assets/sunset.jpg");
+    background-position: center; /* Center the image 
+    background-repeat: no-repeat; /* Do not repeat the image 
+    background-size: cover;
+    */
+}
+
+.logsLogo {
+    width: 80vh;
+    height: auto;
+    top: 100vh;
+    margin: auto;
+    display: block;
+}
+
+.x {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+body {
+    overflow: hidden;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+#textbox {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    margin-right: 50vw;
+    width: 40vw;
+}
